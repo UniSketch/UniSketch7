@@ -1,0 +1,47 @@
+@import "../../assets/scss/_utility";
+
+
+.modal {
+    @include elevate(10);
+    background: $color-base-item;
+    left: 50%;
+    max-width: $container-narrow-width;
+    opacity: 0;
+    outline: 0;
+    padding: $spacing-x-large $spacing-large;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -45%);
+    transition: all $transition;
+    visibility: hidden;
+    width: 100%;
+    z-index: 1001;
+
+
+    &.visible {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        visibility: visible;
+    }
+
+    &.visible + &-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    &-overlay {
+        @extend %absolute;
+        background: rgba($color-text, 0.75);
+        opacity: 0;
+        position: fixed;
+        transition: all $transition;
+        visibility: hidden;
+        z-index: 1000;
+    }
+}
+
+.app-modal-body {
+    margin-bottom: $spacing-x-large;
+}

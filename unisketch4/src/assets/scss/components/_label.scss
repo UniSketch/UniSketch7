@@ -1,0 +1,8 @@
+.label {
+    @extend %uppercase;
+    color: $color-text-soft;
+    font-size: $fs-small;
+    line-height: 1;
+    text-align: left;
+    transition: all $transition;
+}

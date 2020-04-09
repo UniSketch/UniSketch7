@@ -1,0 +1,12 @@
+@import "../../assets/scss/_utility";
+
+
+.form {
+    margin-bottom: 0;
+}
+
+.form__submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

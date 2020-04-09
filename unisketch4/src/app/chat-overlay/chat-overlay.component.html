@@ -1,0 +1,19 @@
+<aside class="chat">
+    <div class="chat__messages" #messageBar>
+        <div class="chatMessage"
+            [class.own]="message.owner"
+            *ngFor="let message of messages">
+            <strong class="chatMessage__userName">{{ message.username }}</strong>
+            <p class="chatMessage__text">{{ message.text }}</p>
+        </div>
+    </div>
+
+    <div class="chat__write">
+        <textarea class="chat__write__input" placeholder="Write a message..."
+            #messageRef
+            (keydown)="handleKeydown($event)"></textarea>
+        <button class="icon-button chat__write__button" (click)="sendMessage()">
+            <svg-icon src="./assets/img/icons/send.svg"></svg-icon>
+        </button>
+    </div>
+</aside>

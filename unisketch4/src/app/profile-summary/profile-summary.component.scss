@@ -1,0 +1,97 @@
+@import "../../assets/scss/_utility";
+
+.profile {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    margin-right: $spacing-base;
+    padding-right: $spacing-large;
+    position: relative;
+
+
+    &__image {
+        $size: 48px;
+
+        border-radius: $size;
+        display: block;
+        height: $size;
+        margin-right: $size * 0.4;
+        width: $size;
+
+
+        &--placeholder {
+            background: $color-text-soft;
+        }
+    } // __image
+
+
+    &__name {
+        font-weight: bold;
+        min-width: 120px;
+    } // __name
+
+
+    &__actions {
+        &__arrow {
+            border-bottom: 2px solid $color-disabled;
+            border-right: 2px solid $color-disabled;
+            height: $spacing-x-small;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: rotate(45deg) translate(-10%, -50%);
+            transition: border-color $transition;
+            width: $spacing-x-small;
+
+            .profile:hover & {
+                border-color: $color-base;
+            }
+        } // __arrow
+
+
+        &__menu {
+            background: $color-base;
+            @include elevate(10);
+            list-style: none;
+            margin: $spacing-x-small (-$spacing-x-small) 0 0;
+            max-height: 0;
+            min-width: 85%;
+            opacity: 0;
+            padding: 0;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            transition: all $transition;
+            visibility: hidden;
+
+            &.expanded {
+                max-height: 400px;
+                opacity: 1;
+                visibility: visible;
+            } // --expanded
+
+        } // __menu
+
+    } // __actions
+
+
+    &__action {
+        button {
+            @extend %button-reset;
+            cursor: pointer;
+            display: block;
+            font: inherit;
+            padding: $spacing-small;
+            text-align: left;
+            transition: all $transition;
+            width: 100%;
+
+            &:hover {
+                background: rgba($color-text-soft, 0.15);
+            }
+
+        }
+
+    } // __action
+
+} // .profile

@@ -1,0 +1,7 @@
+{
+    "/unisketch7/api": {
+        "target": "http://localhost:8147",
+        "secure": false
+    }
+}
+

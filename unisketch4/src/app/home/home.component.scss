@@ -1,0 +1,125 @@
+@import "../../assets/scss/_utility";
+
+
+
+.tools {
+    display: flex;
+    position: relative;
+    user-select: none;
+    z-index: 500;
+
+
+    &__item {
+        margin-right: $spacing-base;
+        position: relative;
+
+
+        .icon-button,
+        &.icon-button {
+            color: $color-base-soft;
+
+            &:hover {
+                color: $color-base-item;
+            }
+
+            &:disabled {
+                color: $color-disabled;
+            }
+
+            &.active {
+                color: $color-primary;
+            }
+            #search_svg{
+                margin-right: 0rem;
+            }
+          
+        }
+
+    }
+    &__spacer {
+        flex: 0 1 $spacing-base;
+
+
+        &--large {
+            margin-left: auto;
+        } // --large
+
+    } // __
+    input.tools__search {
+        padding-left: 0;
+        
+    }
+    #search_svg{
+        margin-right: 0rem;
+    }
+    
+}
+
+
+
+
+.libraryContainer {
+    display: grid;
+    grid-template-columns: minmax(100px, 250px) auto;
+}
+
+
+
+.library {
+    display: grid;
+    grid-gap: $spacing-base;
+    gap: $spacing-base;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 $spacing-base $spacing-x-large;
+
+
+    @include break(mobile) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include break(tablet) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include break(desktop) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include break(hd) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+
+.filter {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: $spacing-base $spacing-base;
+
+
+    &__results-info {
+        color: $color-text-soft;
+        line-height: $lh-small;
+        margin-bottom: 0;
+        margin-right: 50%;
+        text-align: center;
+    }
+
+
+    &__dropdown {
+        align-items: center;
+        display: flex;
+        justify-self: flex-end;
+    }
+
+
+    .label {
+        margin: 0.25em $spacing-small 0 0;
+    }
+}
+
+.folderTree {
+    overflow-x: auto;
+    overflow-y: auto;
+}

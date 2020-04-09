@@ -1,0 +1,38 @@
+<div id="treeContainer">
+
+    <tree-root [focused]="true"
+               [options]="options"
+               [nodes]="nodes"
+               (moveNode)="onMoveNode($event)"
+               (stateChange)="onStateChange($event)">
+        <ng-template #treeNodeTemplate let-node="node">
+
+              <span *ngIf="node === editNode">
+                  <input
+                      class="form-control"
+                      autofocus
+                      [(ngModel)]="node.data.name"
+                      (blur)="stopEdit($event)"
+                      (keyup.enter)="blur($event)"/>
+                    </span>
+            <div *ngIf="node !== editNode">
+                <span>{{ node.data.name }}</span>
+            </div>
+        </ng-template>
+    </tree-root>
+    <div class="menu" *ngIf="contextMenu" (mouseleave)="leave($event)" [style.left.px]="contextMenu.x"
+         [style.top.px]="contextMenu.y">
+        <ul>
+            <li (click)="openNewFolderModal($event)"><a>New Folder</a></li>
+            <li (click)="editFolderName($event)"><a>Rename</a></li>
+            <li (click)="deleteFolder($event)"><a>Delete</a></li>
+            <!--  <li (click)="copy()"><a>Copy</a></li>
+             //<li (click)="cut()"><a>Cut</a></li>
+             //<li (click)="paste()"><a [style.opacity]="canPaste() && 1 || 0.3">Paste</a></li> -->
+        </ul>
+    </div>
+
+</div>
+
+<app-folder-tree-modal (onCreateSuccess)="addFolder($event)" [folder]="selectedFolder"
+                       #folder_modal></app-folder-tree-modal>

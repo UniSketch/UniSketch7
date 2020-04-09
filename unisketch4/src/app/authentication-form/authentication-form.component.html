@@ -1,0 +1,57 @@
+<form class="form" id="login-form" name="form"
+        (ngSubmit)="f.form.valid && authenticate()"
+        #f="ngForm"
+        novalidate
+    >
+
+    <!-- E-Mail -->
+    <div class="form__row">
+        <input type="email" placeholder="user@example.com" id="mail"
+                name="email_address"
+                [(ngModel)]="user.email_address"
+                #email_address="ngModel"
+                required
+            >
+        <label class="label" for="mail">E-Mail</label>
+        <span class="msg msg--error" *ngIf="f.submitted && !email_address.valid">E-Mail is required.</span>
+    </div>
+
+    <!-- Password -->
+    <div class="form__row">
+        <input type="password" placeholder="••••••••••" id="password"
+                name="password"
+                [(ngModel)]="user.password"
+                #password="ngModel"
+                required
+            >
+        <label class="label" for="password">Password</label>
+        <span class="msg msg--error" *ngIf="f.submitted && !password.valid">Password is required.</span>
+    </div>
+
+    <div class="form__row" [ngClass]="{ 'hidden': !isSignUpEnabled }">
+        <input type="text" id="username"
+                name="username"
+                [(ngModel)]="user.username"
+                #username="ngModel"
+                [required]="isSignUpEnabled"
+            >
+        <label for="username" class="label">Username</label>
+        <span class="msg msg--error" *ngIf="f.submitted && !username.valid">Username is required.</span>
+    </div>
+
+    <div class="form__row msg msg--error" *ngIf="errors">{{errors}}</div>
+
+    <!-- Buttons -->
+    <div class="form__submit button-group">
+        <button class="button" id="login-submit"
+                (click)="handleSignInClick()"
+                [ngClass]="{ 'button--cta': !isSignUpEnabled }"
+            >{{ loginButtonText }}</button>
+
+        <!-- Use the data to sign up -->
+        <button class="button"
+                (click)="handleSignUpClick()"
+                [ngClass]="{ 'button--cta': isSignUpEnabled }"
+            >{{ signUpButtonText }}</button>
+    </div>
+</form>

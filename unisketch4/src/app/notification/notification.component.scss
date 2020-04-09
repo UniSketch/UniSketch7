@@ -1,0 +1,90 @@
+@import "../../assets/scss/_utility";
+
+
+.notification {
+    background: $color-base-item 95% center/24px no-repeat;
+    border-radius: $border-radius;
+    @include elevate(1);
+    color: mix($color-text-soft, $color-text);
+    display: flex;
+    line-height: $lh-small;
+    margin-top: $spacing-x-small;
+    padding: $spacing-medium;
+    pointer-events: all;
+    position: relative;
+    transition: all $transition;
+    width: 350px;
+
+
+
+    &.success,
+    &.warning,
+    &.loading {
+        padding-right: $spacing-x-large + $spacing-large;
+    }
+
+    &.success {
+        background-image: url('../../assets/img/icons/checkmark.svg');
+    }
+
+    &.warning {
+        background-color: lighten($color-warning, 32%);
+        background-image: url('../../assets/img/icons/warning.svg');
+        color: saturate(darken($color-warning, 15%), 10%);
+        @include elevate(3, lighten($color-warning, 20%));
+    }
+
+    &.loading {
+
+        &::after {
+            animation: rotate 1s linear infinite;
+            border: 5px solid transparent;
+            border-left-color: $color-primary;
+            content: '';
+            border-radius: 50%;
+            margin-top: -$spacing-large / 2;
+            position: absolute;
+            top: 50%;
+            right: $spacing-medium;
+            height: $spacing-large;
+            width: $spacing-large;
+
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        }
+    }
+
+
+
+    &:hover {
+    }
+
+
+    p,
+    &__body {
+        margin-bottom: 0;
+    }
+
+
+    strong {
+        color: $color-headlines;
+        font-weight: $fw-normal;
+    }
+
+
+    &__image {
+        background: $color-text-soft;
+        border-radius: 50%;
+        display: block;
+        flex: 0 0 auto;
+        height: $spacing-x-large;
+        margin-left: $spacing-base;
+        width: $spacing-x-large;
+    }
+}

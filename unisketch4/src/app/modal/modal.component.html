@@ -1,0 +1,10 @@
+<aside class="modal" tabindex="-1"
+        [ngClass]="{ visible: visible }">
+    <div class="modal__body">
+        <ng-content select=".app-modal-header"></ng-content>
+        <ng-content select=".app-modal-body"></ng-content>
+        <ng-content select=".app-modal-footer"></ng-content>
+    </div>
+</aside>
+
+<div class="modal-overlay" (click)="onContainerClicked()"></div>

@@ -1,0 +1,43 @@
+%container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $container-width;
+  padding-left: $spacing-small;
+  padding-right: $spacing-small;
+  width: 100%;
+}
+
+%narrow-container {
+  @extend %container;
+  max-width: $container-narrow-width;
+}
+
+%absolute {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+%fullscreen-container {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  @extend %container;
+}
+
+.container--narrow {
+  @extend %narrow-container;
+}
+
+.view-container {
+    padding-top: $topbar-height;
+}
+
+.content {
+    padding-bottom: $spacing-section;
+    padding-top: $spacing-section;
+}

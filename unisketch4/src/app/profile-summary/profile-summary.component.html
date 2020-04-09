@@ -1,0 +1,26 @@
+<div class="profile"
+        #profile
+        (click)="toggleProfileMenu()">
+    <img src="{{globals.basePath}}/api/sketch/preview/{{user.avatar_sketch_id}}" alt="Your profile image" class="profile__image" *ngIf="user.avatar_sketch_id; else placeholder">
+    <ng-template #placeholder>
+        <span class="profile__image profile__image--placeholder"></span>
+    </ng-template>
+
+    <strong class="profile__name">Hello, {{ user.username }}</strong>
+
+    <div class="profile__actions">
+        <span class="profile__actions__arrow"></span>
+        <ul class="profile__actions__menu"
+                [ngClass]="{ expanded: isProfileMenuVisible }">
+            <li class="profile__action">
+                <button [routerLink]="['/dashboard/home']">Library</button>
+            </li>
+            <li class="profile__action">
+                <button [routerLink]="['/dashboard/profile']">Profile</button>
+            </li>
+            <li class="profile__action">
+                <button (click)="logout()">Logout</button>
+            </li>
+        </ul>
+    </div>
+</div>

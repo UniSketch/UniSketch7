@@ -1,0 +1,29 @@
+//
+// Container placeholders
+//
+
+%container {
+  margin: 0 auto;
+  max-width: $container-width;
+  padding: 0 $spacing-base;
+  position: relative;
+  width: 100%;
+}
+
+%container-narrow {
+  @extend %container;
+  max-width: $container-narrow-width;
+}
+
+%fullscreen-container {
+  height: 100%;
+  width: 100%;
+}
+
+%absolute {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

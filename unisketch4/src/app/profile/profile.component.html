@@ -1,0 +1,98 @@
+<div class="container--narrow content">
+    <h2>Edit your Profile</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet molestias ducimus atque.</p>
+
+
+    <div class="user-summary">
+        <div class="user-summary__image-wrap" (click)="avatarModal.show()">
+            <img src="{{globals.basePath}}/api/sketch/preview/{{user.avatar_sketch_id}}" alt="Your profile image" class="user-summary__image"
+                *ngIf="user.avatar_sketch_id; else placeholder">
+            <ng-template #placeholder>
+                <span class="user-summary__image user-summary__image--placeholder"></span>
+            </ng-template>
+        </div>
+
+        <div class="user-summary__info">
+            <strong class="user-summary__info__name">{{ user.name }}</strong>
+            <span class="user-summary__info__email">{{ user.email_address }}</span>
+        </div>
+    </div>
+
+
+    <form class="form" (ngSubmit)="onSubmit()">
+        <div class="form__row">
+            <input type="text" id="user"
+                name="username"
+                [(ngModel)]="user.name"
+                required
+                #name="ngModel">
+            <label for="username" class="label">Username</label>
+            <span class="msg msg--error"
+                *ngIf="name.invalid && name.touched">
+                Username is required.</span>
+        </div>
+
+        <div class="form__row">
+            <input type="email" id="email" placeholder="user@example.com"
+                name="email"
+                [(ngModel)]="user.email_address"
+                required
+                #email="ngModel">
+            <label for="email" class="label">E-Mail</label>
+            <span class="msg msg--error"
+                *ngIf="email.invalid && email.touched">
+                Invalid e-mail address.</span>
+        </div>
+
+        <div class="form__row">
+            <input type="password" id="oldpass" placeholder="••••••••••"
+                name="oldpass"
+                [(ngModel)]="user.old_password"
+                required
+                #oldpass="ngModel">
+            <label for="oldpass" class="label">Current Password</label>
+            <span class="msg msg--error"
+                *ngIf="oldpass.invalid && oldpass.touched">
+                Your old password is required.</span>
+        </div>
+
+        <div class="msg msg--error"
+            *ngIf="errors && form.controls['oldPassword'].touched">
+            Incorrect password.</div>
+
+        <div class="form__row">
+            <input type="password" id="newpass" placeholder="••••••••"
+                name="newpass"
+                [(ngModel)]="user.password">
+            <label for="newpass" class="label">New Password</label>
+        </div>
+
+        <div class="form__submit button-group">
+            <button class="button button--cta" type="submit">Save Changes</button>
+        </div>
+
+
+        <div class="content delete-account">
+            <h4>Delete my Account</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, accusantium natus dolore.</p>
+            <p>&nbsp;</p>
+
+            <div class="button-group button-group--center">
+                <button class="button button--warning" type="button" (click)="deleteProfileButtonClick()">Delete</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<app-modal #modal>
+    <h3 class="app-modal-header">Delete my Account</h3>
+    <p class="app-modal-body">We're sad to see you go. Are you sure you want to delete your account?</p>
+    <div class="app-modal-footer button-group">
+        <button type="button" class="button button--flat" (click)="modal.hide()">Cancel</button>
+        <button type="button" class="button button--warning" (click)="deleteProfile()">Delete</button>
+    </div>
+</app-modal>
+
+<app-profile-modal-avatar #avatarModal (onAvatarChanged)="user.avatar_sketch_id = $event.id"></app-profile-modal-avatar>

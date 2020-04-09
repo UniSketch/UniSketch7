@@ -1,0 +1,27 @@
+<app-modal #modal (toggle)="handleToggle($event)">
+    <header class="app-modal-header">
+        <h3>Add Tags {{ title }}</h3>
+        <p>Tags can help collaborators and you find the sketch more easily through the search bar.</p>
+        <p>&nbsp;</p>
+    </header>
+
+    <div class="app-modal-body form">
+        <div class="form__row">
+            <input type="text" placeholder="Enter a tag..." autocomplete="false" id="tagsinput" #tagsInput
+                (focus)="toggleInput()"
+                (blur)="toggleInput()"
+                (input)="updateInput()">
+            <label for="tagsinput" class="label">Press enter to save a tag:</label>
+
+            <span class="msg msg--error" *ngIf="inputHasError">Tag already exists on this sketch.</span>
+        </div>
+        <div class="form__row tags-mirror">
+            <ng-template #mirror></ng-template>
+        </div>
+
+        <div class="form__submit">
+            <button type="button" class="button button--cta"
+                (click)="modal.hide()">Close</button>
+        </div>
+    </div>
+</app-modal>

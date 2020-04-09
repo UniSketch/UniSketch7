@@ -1,0 +1,17 @@
+<app-modal #modal>
+    <h3 class="app-modal-header">Update Your Profile Picture</h3>
+    <div class="app-modal-body">
+        <span *ngIf="!sketches">Loading...</span>
+        <p>&nbsp;</p>
+        <div class="avatar-select">
+            <div class="avatar-sketchcard" *ngFor="let sketch of sketches">
+                <div class="avatar-sketchcard__image">
+                    <img (click)="selectAvatar(sketch)" src="{{globals.basePath}}/api/sketch/preview/{{sketch.id}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="button button--flat" (click)="modal.hide()">Close</button>
+    </div>
+</app-modal>

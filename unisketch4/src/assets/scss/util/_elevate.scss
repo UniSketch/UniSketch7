@@ -1,0 +1,32 @@
+///
+/// Mixin to give the illusion of the item being elevated.
+/// Applies multiple box-shadows.
+///
+
+@mixin elevate($level: 1, $color: #000, $opacity: false) {
+  $offset-x-a: $level * 0;
+  $offset-x-b: $level * 0;
+  $offset-y-a: $level * 1px;
+  $offset-y-b: 2px;
+
+  $blur-a: $level * 3px;
+  $blur-b: 3px;
+
+  $opacity-a: 0.12;
+  $opacity-b: 0.05;
+
+
+  @if $color != #000 {
+    $opacity-a: 0.3;
+    $opacity-b: 0.3;
+  }
+
+
+  box-shadow: $offset-x-a $offset-y-a $blur-a rgba($color, $opacity-a),
+    $offset-x-b $offset-y-b $blur-b rgba($color, $opacity-b);
+
+
+  @if $opacity {
+    @warn 'The parameter `$opacity` is deprecated and should be removed.';
+  }
+}

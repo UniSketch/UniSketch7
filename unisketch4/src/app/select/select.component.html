@@ -1,0 +1,12 @@
+<div class="select" (click)="toggleMenu()">
+    <span class="select__current">{{ current.label }}</span>
+    <span class="select__arrow"></span>
+
+    <div class="select__menu" [ngClass]="{ visible: isExpanded }">
+        <span class="select__menu__option"
+                (click)="selectOption(option)"
+                [ngClass]="{ selected: isSelected(option) }"
+                *ngFor="let option of options"
+            >{{ option.label }}</span>
+    </div>
+</div>

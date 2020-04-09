@@ -1,0 +1,19 @@
+@import "../../assets/scss/_utility";
+
+
+.button-group {
+    flex-direction: column;
+
+    @include break(mobile) {
+        flex-direction: row-reverse;
+
+
+        .button + .button {
+            margin-left: 0;
+        }
+
+        .button:first-child {
+            margin-left: $spacing-small;
+        }
+    }
+}

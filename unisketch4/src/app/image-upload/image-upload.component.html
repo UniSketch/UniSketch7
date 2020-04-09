@@ -1,0 +1,18 @@
+<!-- Picture Upload-->
+<div *ngIf="authService.loginCookieExists()" class="tools__settings__group__item" (mouseenter)="togglePictureModal()"
+     (mouseleave)="togglePictureModal()">
+    <div class="icon-button tools__item" [ngClass]="{ active: isImageSelected }">
+        <svg-icon src="assets/img/icons/picture.svg"></svg-icon>
+    </div>
+    <div class="tools__menu tools__menu--brush"
+         [ngClass]="{ visible: isPictureModalVisible}">
+        <label for="file-upload" class="button button--cta button--small">
+            <svg-icon src="assets/img/icons/upload.svg"></svg-icon>
+            <br>
+            Upload Image
+        </label>
+        <input id="file-upload" (change)="getBase64($event)" accept=".jpg, .jpeg, .bmp, .gif, .png, .svg" type="file"/>
+    </div>
+</div>
+<div (document:mousemove)="onMouseMove($event)" #imagePreviewDiv style="display: none;" id="imagePreviewDiv"><img
+    #imagePreview/></div>

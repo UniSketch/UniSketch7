@@ -1,0 +1,10 @@
+<section class="public-sketches">
+    <h2 class="logo public-sketches__title">Uni<span>Sketch</span> Gallery</h2>
+    <div class="cards">
+        <app-sketchcard
+            *ngFor="let sketch of sketches"
+            [sketch]="sketch"
+            [showControls]=false
+        ></app-sketchcard>
+    </div>
+</section>

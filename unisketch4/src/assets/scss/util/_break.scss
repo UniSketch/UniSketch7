@@ -1,0 +1,39 @@
+//
+// mobile-first breakpoint mixin
+//
+
+$breakpoints: (
+  'mobile':             500px,
+  'tablet':             768px,
+  'tablet-l':           1024px,
+  'desktop':            1336px,
+  'hd':                 1600px,
+  '4k':                 2400px
+) !default;
+
+@mixin break($breakpoint, $modifier: 'min') {
+
+  @if map-has-key($breakpoints, $breakpoint) {
+    $size: map-get($breakpoints, $breakpoint);
+
+    @if ($modifier == 'max') {
+      $size: $size - 1;
+    }
+
+    @media only screen and (#{$modifier}-width: $size) {
+      @content;
+    }
+  }
+
+  @else {
+    @if $breakpoint / $breakpoint != 1 {
+      @warn 'Invalid breakpoint `#{$breakpoint}`: Either choose a pixel value or a breakpoint from the predefined breakpoints mixin.';
+    }
+
+    @else {
+      @media only screen and (#{$modifier}-width: $breakpoint) {
+        @content;
+      }
+    }
+  }
+}

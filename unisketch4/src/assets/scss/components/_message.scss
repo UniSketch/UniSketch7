@@ -1,0 +1,9 @@
+.msg {
+
+    &--error {
+        color: $color-warning;
+        font-size: $fs-small;
+        line-height: 1;
+        margin-top: $spacing-x-small;
+    }
+}

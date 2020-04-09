@@ -1,0 +1,31 @@
+.tools {
+    background: $color-ui-base-soft;
+    padding: $spacing-x-small $spacing-base;
+    position: relative;
+    width: 100%;
+
+
+    &__search {
+        border-bottom: 0;
+        color: $color-base;
+        font-size: $fs-medium;
+        padding-left: ($icon-size * 1.125) * 1.5;
+        width: 100%;
+
+
+        &:focus + &-icon {
+
+        }
+
+
+        &-icon {
+            color: $color-inactive;
+            height: $icon-size * 1.125;
+            left: $spacing-base;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: $icon-size * 1.125;
+        }
+    }
+}

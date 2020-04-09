@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Sent Email</title>
+  <desc>A solid styled icon from Orion Icon Library.</desc>
+  <path data-name="layer2"
+  fill="#202020" d="M5.2 27.5L23.1 38 56 5.2 5.2 27.5z"></path>
+  <path data-name="layer1" fill="#202020" d="M25.9 40.9l10.9 17.9 22-50.7-32.9 32.8z"></path>
+</svg>

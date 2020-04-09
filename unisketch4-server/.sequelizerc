@@ -1,0 +1,8 @@
+/** 
+ * This file is executed when sequelize-cli is run, and simply changes its config file from 'config.json' to 'database.json'. 
+ */
+const path = require('path');
+
+module.exports = {
+    'config': path.resolve('config', 'database.json')
+}

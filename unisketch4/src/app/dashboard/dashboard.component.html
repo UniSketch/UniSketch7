@@ -1,0 +1,23 @@
+<header class="topbar">
+    <div class="topbar__column">
+        <button class="button button--cta topbar__button"
+            (click)="createSketch()">Create Sketch</button>
+    </div>
+    <div class="topbar__column">
+        <h1 class="topbar__title">
+            <span class="logo">Uni<span>Sketch</span></span>
+            <a [routerLink]="['home']"></a>
+        </h1>
+    </div>
+    <div class="topbar__column">
+        <app-profile-summary></app-profile-summary>
+    </div>
+</header>
+
+<div class="view-container">
+    <router-outlet></router-outlet>
+</div>
+
+<footer class="footer">
+    <div class="footer__copyright">&copy; {{ year }} UniSketch</div>
+</footer>

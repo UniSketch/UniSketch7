@@ -1,0 +1,200 @@
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1271 611">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #fff;
+            }
+
+            .cls-2 {
+                fill: #e8b142;
+            }
+
+            .cls-3 {
+                fill: #3ee9ed;
+            }
+
+            .cls-4 {
+                fill: #890404;
+            }
+
+            .cls-5 {
+                fill: #22600e;
+            }
+
+            .cls-6 {
+                fill: #449fe2;
+            }
+
+            .cls-7 {
+                fill: #f02596;
+            }
+
+            .cls-8 {
+                fill: #7844aa;
+            }
+
+            .cls-9 {
+                fill: #00c499;
+            }
+
+            .cls-10 {
+                fill: #6c9b4e;
+            }
+
+            .cls-11 {
+                fill: #4453ad;
+            }
+
+            .cls-12 {
+                fill: #f7df4d;
+            }
+
+            .path {
+                stroke-dasharray: 1000px;
+                stroke-dashoffset: 1000px;
+                animation: dash 5s linear forwards;
+            }
+
+            .pash_delay_1 {
+                animation-delay: 0ms;
+            }
+
+            .pash_delay_2 {
+                animation-delay: 100ms;
+            }
+
+            .pash_delay_3 {
+                animation-delay: 200ms;
+            }
+
+            .pash_delay_4 {
+                animation-delay: 300ms;
+            }
+
+            .pash_delay_5 {
+                animation-delay: 400ms;
+            }
+
+            .pash_delay_6 {
+                animation-delay: 500ms;
+            }
+
+            @keyframes dash {
+                to {
+                    stroke-dashoffset: 0px;
+                }
+            }
+        </style>
+    </defs>
+    <title>UniSketch_Background2</title>
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M817,583.5A53.5,53.5,0,1,1,870.5,530,53.56,53.56,0,0,1,817,583.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#e8b142" fill="none" d="M817,477a53,53,0,1,1-53,53,53.06,53.06,0,0,1,53-53m0-1a54,54,0,1,0,54,54,54,54,0,0,0-54-54Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M818,579.5A49.5,49.5,0,1,1,867.5,530,49.56,49.56,0,0,1,818,579.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#3ee9ed" fill="none" d="M818,481a49,49,0,1,1-49,49,49.06,49.06,0,0,1,49-49m0-1a50,50,0,1,0,50,50,50,50,0,0,0-50-50Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M273.13,165.3A57.3,57.3,0,0,1,236.49,152c-24.69-20.6-28.06-57.91-7.53-83.17a58.31,58.31,0,0,1,45.36-21.75A57.3,57.3,0,0,1,311,60.38c24.69,20.6,28.06,57.91,7.53,83.17A58.31,58.31,0,0,1,273.13,165.3Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#890404" fill="none" d="M274.33,46.58v1h0a56.79,56.79,0,0,1,36.31,13.19c24.48,20.43,27.82,57.42,7.46,82.47a57.81,57.81,0,0,1-45,21.56,56.79,56.79,0,0,1-36.31-13.19c-24.48-20.43-27.82-57.42-7.46-82.47a57.81,57.81,0,0,1,45-21.56v-1m0,0a58.88,58.88,0,0,0-45.75,21.93c-20.74,25.51-17.34,63.06,7.6,83.87a57.44,57.44,0,0,0,37,13.42,58.87,58.87,0,0,0,45.75-21.93c20.74-25.51,17.34-63.06-7.6-83.87a57.43,57.43,0,0,0-37-13.42Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M273.74,162.09a53.9,53.9,0,0,1-34.45-12.54,55.41,55.41,0,0,1-7.45-77.2A53.64,53.64,0,0,1,308,65a55.41,55.41,0,0,1,7.45,77.2A53.61,53.61,0,0,1,273.74,162.09Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#22600e" fill="none" d="M273.59,52.91a53.4,53.4,0,0,1,34.13,12.43,54.91,54.91,0,0,1,7.38,76.5,53.14,53.14,0,0,1-75.49,7.32,54.91,54.91,0,0,1-7.38-76.5,53.12,53.12,0,0,1,41.36-19.74h0m0-1A54.14,54.14,0,0,0,231.45,72a55.85,55.85,0,0,0,7.52,77.9,54.14,54.14,0,0,0,76.9-7.45,55.85,55.85,0,0,0-7.52-77.9,54.09,54.09,0,0,0-34.78-12.66Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1038.5,450.5c-80,0-145-65-145-145s65-145,145-145,145,65,145,145S1118.45,450.5,1038.5,450.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#890404" fill="none" d="M1038.5,161a144.5,144.5,0,1,1-102.18,42.32A143.55,143.55,0,0,1,1038.5,161m0-1A145.5,145.5,0,1,0,1184,305.5,145.5,145.5,0,0,0,1038.5,160Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1038,445.5c-76.92,0-139.5-62.58-139.5-139.5S961.08,166.5,1038,166.5s139.5,62.58,139.5,139.5S1114.92,445.5,1038,445.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#449fe2" fill="none" d="M1038,167a139,139,0,1,1-98.29,40.71A138.09,138.09,0,0,1,1038,167m0-1a140,140,0,1,0,140,140,140,140,0,0,0-140-140Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M254,453.5A121.5,121.5,0,1,1,375.5,332,121.64,121.64,0,0,1,254,453.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#22600e" fill="none" d="M254,211a121,121,0,1,1-85.56,35.44A120.21,120.21,0,0,1,254,211m0-1A122,122,0,1,0,376,332,122,122,0,0,0,254,210Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M253.5,447.5a115,115,0,1,1,115-115A115.13,115.13,0,0,1,253.5,447.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#f02596" fill="none" d="M253.5,218a114.5,114.5,0,1,1-81,33.54,113.75,113.75,0,0,1,81-33.54m0-1A115.5,115.5,0,1,0,369,332.5,115.5,115.5,0,0,0,253.5,217Z"
+        transform="translate(-71 -8)" />
+    <g id="_Ellipse_" data-name="&lt;Ellipse&gt;">
+        <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1166,234.5a82.5,82.5,0,1,1,82.5-82.5A82.59,82.59,0,0,1,1166,234.5Z"
+            transform="translate(-71 -8)" />
+        <path class="path pash_delay_1" stroke="#f02596" fill="none" d="M1166,70a82,82,0,1,1-82,82,82.09,82.09,0,0,1,82-82m0-1a83,83,0,1,0,83,83,83,83,0,0,0-83-83Z"
+            transform="translate(-71 -8)" />
+    </g>
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M376.61,597.5c-67.76,0-122.89-55.24-122.89-123.15s55.13-123.15,122.89-123.15S499.5,406.45,499.5,474.35,444.37,597.5,376.61,597.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#e8b142" fill="none" d="M376.61,351.71a122.52,122.52,0,1,1-86.54,35.92,121.47,121.47,0,0,1,86.54-35.92m0-1c-68.15,0-123.39,55.36-123.39,123.65S308.46,598,376.61,598,500,542.64,500,474.35,444.75,350.71,376.61,350.71Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M374.11,594.5c-66.39,0-120.39-53.9-120.39-120.15s54-120.15,120.39-120.15S494.5,408.1,494.5,474.35,440.49,594.5,374.11,594.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#7844aa" fill="none" d="M374.11,354.71a119.77,119.77,0,1,1-84.78,35,119.23,119.23,0,0,1,84.78-35m0-1c-66.77,0-120.89,54-120.89,120.65S307.34,595,374.11,595,495,541,495,474.35,440.87,353.71,374.11,353.71Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M214,610.5c-78.57,0-142.5-63.92-142.5-142.5S135.43,325.5,214,325.5,356.5,389.42,356.5,468,292.57,610.5,214,610.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#00c499" fill="none" d="M214,326a142,142,0,1,1-100.41,41.59A141.07,141.07,0,0,1,214,326m0-1A143,143,0,1,0,357,468,143,143,0,0,0,214,325Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M214.5,606.5c-76.09,0-138-61.91-138-138s61.91-138,138-138,138,61.91,138,138S290.59,606.5,214.5,606.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#7844aa" fill="none" d="M214.5,331a137.5,137.5,0,1,1-97.23,40.27A136.6,136.6,0,0,1,214.5,331m0-1A138.5,138.5,0,1,0,353,468.5,138.5,138.5,0,0,0,214.5,330Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1165.5,231.5a78,78,0,1,1,78-78A78.09,78.09,0,0,1,1165.5,231.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#3ee9ed" fill="none" d="M1165.5,76a77.5,77.5,0,1,1-77.5,77.5A77.59,77.59,0,0,1,1165.5,76m0-1a78.5,78.5,0,1,0,78.5,78.5A78.5,78.5,0,0,0,1165.5,75Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1225,404.5A116.5,116.5,0,1,1,1341.5,288,116.63,116.63,0,0,1,1225,404.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#890404" fill="none" d="M1225,172a116,116,0,1,1-82,34,115.24,115.24,0,0,1,82-34m0-1a117,117,0,1,0,117,117,117,117,0,0,0-117-117Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1004.5,262.5a102,102,0,1,1,102-102A102.12,102.12,0,0,1,1004.5,262.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#6c9b4e" fill="none" d="M1004.5,59A101.5,101.5,0,1,1,903,160.5,101.61,101.61,0,0,1,1004.5,59m0-1A102.5,102.5,0,1,0,1107,160.5,102.5,102.5,0,0,0,1004.5,58Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1005,267.5A107.5,107.5,0,1,1,1112.5,160,107.62,107.62,0,0,1,1005,267.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#22600e" fill="none" d="M1005,53a107,107,0,1,1-75.66,31.34A106.3,106.3,0,0,1,1005,53m0-1a108,108,0,1,0,108,108A108,108,0,0,0,1005,52Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1225.5,400.5a112,112,0,1,1,112-112A112.13,112.13,0,0,1,1225.5,400.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#4453ad" fill="none" d="M1225.5,177a111.5,111.5,0,1,1-78.84,32.66A110.77,110.77,0,0,1,1225.5,177m0-1A112.5,112.5,0,1,0,1338,288.5,112.5,112.5,0,0,0,1225.5,176Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M1005.5,263.5a103,103,0,1,1,103-103A103.12,103.12,0,0,1,1005.5,263.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#6c9b4e" fill="none" d="M1005.5,58A102.5,102.5,0,1,1,903,160.5,102.62,102.62,0,0,1,1005.5,58m0-1A103.5,103.5,0,1,0,1109,160.5,103.5,103.5,0,0,0,1005.5,57Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M891.5,556.5a46,46,0,1,1,46-46A46.05,46.05,0,0,1,891.5,556.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#f02596" fill="none" d="M891.5,465A45.5,45.5,0,1,1,846,510.5,45.55,45.55,0,0,1,891.5,465m0-1A46.5,46.5,0,1,0,938,510.5,46.5,46.5,0,0,0,891.5,464Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M325.91,120.21c-30.4,0-55.12-25.06-55.12-55.86S295.51,8.5,325.91,8.5,381,33.56,381,64.36,356.31,120.21,325.91,120.21Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#4453ad" fill="none" d="M325.91,9C356,9,380.54,33.83,380.54,64.36s-24.5,55.36-54.63,55.36-54.63-24.83-54.63-55.36S295.79,9,325.91,9m0-1c-30.72,0-55.63,25.23-55.63,56.36s24.9,56.36,55.63,56.36,55.63-25.23,55.63-56.36S356.63,8,325.91,8Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M891.5,552.5c-22.61,0-41-18.62-41-41.5s18.39-41.5,41-41.5,41,18.62,41,41.5S914.11,552.5,891.5,552.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#f7df4d" fill="none" d="M891.5,470c22.33,0,40.5,18.39,40.5,41s-18.17,41-40.5,41S851,533.61,851,511s18.17-41,40.5-41m0-1c-22.92,0-41.5,18.8-41.5,42s18.58,42,41.5,42S933,534.2,933,511s-18.58-42-41.5-42Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M326.48,115.57c-27.55,0-50-22.71-50-50.63s22.41-50.63,50-50.63,50,22.71,50,50.63S354,115.57,326.48,115.57Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#00c499" fill="none" d="M326.48,14.81c27.27,0,49.46,22.49,49.46,50.13s-22.19,50.13-49.46,50.13S277,92.58,277,64.94s22.19-50.13,49.46-50.13m0-1C298.61,13.81,276,36.7,276,64.94s22.59,51.13,50.46,51.13,50.46-22.89,50.46-51.13-22.59-51.13-50.46-51.13Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M381.54,109.76c-27.55,0-50-22.71-50-50.63S354,8.5,381.54,8.5s50,22.71,50,50.63S409.09,109.76,381.54,109.76Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#449fe2" fill="none" d="M381.54,9C408.81,9,431,31.49,431,59.13s-22.19,50.13-49.46,50.13-49.46-22.49-49.46-50.13S354.26,9,381.54,9m0-1c-27.87,0-50.46,22.89-50.46,51.13s22.59,51.13,50.46,51.13S432,87.37,432,59.13,409.41,8,381.54,8Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M382.11,105.11c-24.7,0-44.8-20.37-44.8-45.4s20.1-45.4,44.8-45.4,44.8,20.37,44.8,45.4S406.81,105.11,382.11,105.11Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#7844aa" fill="none" d="M382.11,14.81c24.43,0,44.3,20.14,44.3,44.9s-19.87,44.9-44.3,44.9-44.3-20.14-44.3-44.9,19.87-44.9,44.3-44.9m0-1c-25,0-45.3,20.55-45.3,45.9s20.28,45.9,45.3,45.9,45.3-20.55,45.3-45.9-20.28-45.9-45.3-45.9Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M868,618.5c-27.85,0-50.5-22.88-50.5-51s22.65-51,50.5-51,50.5,22.88,50.5,51S895.85,618.5,868,618.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#890404" fill="none" d="M868,517c27.57,0,50,22.65,50,50.5S895.57,618,868,618s-50-22.65-50-50.5S840.43,517,868,517m0-1c-28.17,0-51,23.06-51,51.5S839.83,619,868,619s51-23.06,51-51.5S896.17,516,868,516Z"
+        transform="translate(-71 -8)" />
+    <path class="cls-1 path pash_delay_1" stroke="#fff" fill="none" d="M868.5,613.5a46,46,0,1,1,46-46A46.05,46.05,0,0,1,868.5,613.5Z"
+        transform="translate(-71 -8)" />
+    <path class="path pash_delay_1" stroke="#4453ad" fill="none" d="M868.5,522A45.5,45.5,0,1,1,823,567.5,45.55,45.55,0,0,1,868.5,522m0-1A46.5,46.5,0,1,0,915,567.5,46.5,46.5,0,0,0,868.5,521Z"
+        transform="translate(-71 -8)" />
+</svg>

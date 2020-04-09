@@ -1,0 +1,92 @@
+.topbar {
+    align-items: center;
+    background:  $color-ui-base;
+    color: $color-base;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: $topbar-height;
+    left: 0;
+    padding: $spacing-x-small $spacing-base;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+
+
+    &__column {
+        &:nth-child(1) {
+            justify-self: start;
+        }
+
+        &:nth-child(2) {
+            justify-self: center;
+        }
+
+        &:nth-child(3) {
+            justify-self: end;
+        }
+
+
+        &--sketchtitle {
+            align-items: center;
+            display: flex;
+            justify-self: stretch;
+        }
+    } // __column
+
+
+    &__title {
+        color: inherit;
+        font-size: $fs-large;
+        margin-bottom: 0;
+        outline: 0;
+        padding: ($spacing-x-small / 2) $spacing-small;
+        position: relative;
+        text-align: center;
+        white-space: nowrap;
+
+        a {
+            @extend %absolute;
+        }
+
+
+        &[contenteditable] {
+            border-radius: $border-radius;
+            font-weight: $fw-normal;
+            min-width: 50px;
+            overflow: hidden;
+            transition: background $transition;
+
+            &:focus {
+                background: rgba($color-base, 0.1);
+            }
+
+            br {
+                display: none;
+            }
+
+            * {
+                display: inline;
+                white-space: nowrap;
+            }
+
+
+            &:empty::before {
+                content: attr(placeholder);
+                color: $color-disabled;
+                pointer-events: none;
+            }
+        }
+    } // __title
+
+
+    &__tags {
+        color: $color-text-soft;
+        transition: color $transition;
+
+        &:hover {
+            color: $color-primary;
+        }
+    } // __tags
+
+} // .topbar

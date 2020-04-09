@@ -1,0 +1,127 @@
+//
+// Enter Container
+//
+
+@import "../../assets/scss/_utility";
+
+
+
+@mixin enter-gradient($simple: true) {
+    @if $simple {
+        background: linear-gradient(135deg, $color-primary, $color-accent);
+    } @else {
+        background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.3))
+            0 100%/100% 70% no-repeat,
+          linear-gradient(135deg, $color-primary, $color-accent);
+    }
+}
+
+
+.enter {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+
+    &__background {
+        height: $spacing-section;
+        margin-bottom: -$spacing-section;
+        width: 100%;
+
+
+        @include break(mobile) {
+            @include enter-gradient;
+            position: absolute;
+            height: 35vh;
+            z-index: 0;
+        }
+
+        @include break(tablet) {
+            height: 40vh;
+        }
+    }
+
+
+    &__container {
+        max-width: $container-narrow-width;
+        position: relative;
+        text-align: right;
+        width: 100%;
+
+
+        @include break(mobile) {
+            margin: 8vh auto $spacing-section;
+        }
+
+
+        @include break(tablet) {
+            margin-top: 15vh;
+        }
+    }
+
+
+    &__headline {
+        color: $color-base-item;
+        padding-top: $spacing-large;
+        text-align: center;
+
+
+        @include break(mobile, max) {
+            @include enter-gradient(true);
+            margin-bottom: 0;
+            padding-bottom: $spacing-large;
+        }
+    }
+
+
+    &__body {
+        background: $color-base-item;
+        @include elevate(3);
+        min-height: 350px;
+        padding: $spacing-large $spacing-base;
+        text-align: left;
+        transition: all $transition;
+        width: 100%;
+
+
+        @include break(mobile) {
+            @include elevate(5);
+            padding: $spacing-x-large $spacing-large;
+
+
+            &:focus-within {
+                @include elevate(15);
+            }
+        }
+    }
+
+
+    &__forgot {
+        display: inline-block;
+        margin-top: $spacing-small;
+        padding: 0 $spacing-base;
+    }
+
+
+    .button-group {
+        flex-direction: column;
+
+        @include break(mobile) {
+            flex-direction: row-reverse;
+
+
+            .button + .button {
+                margin-left: 0;
+            }
+
+            .button:first-child {
+                margin-left: $spacing-small;
+            }
+
+            .button {
+                white-space: nowrap;
+            }
+        }
+    }
+
+}

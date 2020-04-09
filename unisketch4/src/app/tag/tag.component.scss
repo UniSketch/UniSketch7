@@ -1,0 +1,53 @@
+@import "../../assets/scss/_utility";
+
+$button-size: 14px;
+$color-original: $color-primary;
+$color: desaturate(lighten($color-original, 40%), 5%);
+
+.tag {
+    background-color: $color;
+    border-radius: $border-radius;
+    color: colorInvert($color);
+    cursor: default;
+    display: inline-block;
+    font-size: $fs-small;
+    font-weight: $fw-bold;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin: 2px;
+    padding: $spacing-x-small ($button-size * 2.25) $spacing-x-small $spacing-small;
+    position: relative;
+    text-align: left;
+    transition: all $transition;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+
+    &:hover {
+        @include elevate(3, $color);
+    }
+
+
+    &__delete {
+        @extend %button-reset;
+        color: $color-original;
+        cursor: pointer;
+        margin-top: -$button-size / 2;
+        position: absolute;
+        right: $spacing-x-small;
+        top: 50%;
+        transition: all $transition;
+
+
+        &:hover {
+            color: darken($color-original, 10%);
+        }
+
+
+        svg-icon {
+            display: block;
+            height: $button-size;
+            width: $button-size;
+        }
+    }
+}

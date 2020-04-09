@@ -1,0 +1,16 @@
+@mixin dye($key) {
+  $color: map-get($dye-colors, $key);
+
+  background-color: $color;
+
+  @if colorInvert($color) == #ffffff {
+    color: colorInvert($color);
+  }
+
+  @for $i from 1 through 6 {
+    h#{$i} {
+      color: inherit;
+    }
+  }
+}
+

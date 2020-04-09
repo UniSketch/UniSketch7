@@ -1,0 +1,35 @@
+.form {
+  &__row {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: $spacing-large;
+    position: relative;
+
+
+    &.msg {
+        margin: 0;
+    }
+
+    .msg {
+        margin-top: 0;
+        order: -1;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+
+    &.error {
+    }
+
+
+    &.hidden {
+        display: none;
+    }
+  }
+
+
+  &__submit {
+    margin-top: $spacing-x-large;
+  }
+}

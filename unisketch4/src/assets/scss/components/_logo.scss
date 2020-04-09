@@ -1,0 +1,31 @@
+.logo {
+  font-weight: $fw-normal;
+
+  span {
+    font-weight: $fw-bold;
+    position: relative;
+    transition: color $transition;
+
+
+    &::after {
+        background: linear-gradient(115deg, $color-primary, $color-accent);
+        bottom: 0;
+        content: '';
+        height: 100%;
+        left: 0;
+        mix-blend-mode: darken;
+        position: absolute;
+        transform: scaleX(0);
+        transform-origin: 0 100%;
+        transition: transform $transition;
+        width: 100%;
+    }
+  }
+
+  .topbar__title:hover > & span {
+    // color: $color-primary;
+    &::after {
+        transform: scaleY(1);
+    }
+  }
+}

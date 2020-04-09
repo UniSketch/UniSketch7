@@ -1,0 +1,21 @@
+<section class="enter">
+    <div class="enter__background"></div>
+
+    <div class="enter__container">
+        <h1 class="enter__headline logo">Uni<span>Sketch</span></h1>
+
+        <div class="enter__body">
+            <app-authentication-form *ngIf="!showForgotPassword"></app-authentication-form>
+            <app-forgot-password-form *ngIf="showForgotPassword"></app-forgot-password-form>
+        </div>
+
+        <a class="enter__forgot" (click)="toggleForgotPassword()">
+            <ng-container *ngIf="!showForgotPassword; else login">Forgot Password?</ng-container>
+            <ng-template #login>Sign In</ng-template>
+        </a>
+    </div>
+</section>
+
+<app-about></app-about>
+
+<public-sketches></public-sketches>

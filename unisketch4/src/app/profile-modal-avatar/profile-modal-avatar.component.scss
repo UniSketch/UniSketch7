@@ -1,0 +1,46 @@
+@import "../../assets/scss/_utility";
+
+
+.avatar-select {
+    display: grid;
+    gap: $spacing-x-small;
+    grid-gap: $spacing-x-small;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.avatar-sketchcard {
+    background: $color-base-item;
+    @include elevate(2);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    transition: all $transition;
+
+
+    &:hover, &:focus {
+        @include elevate(5);
+    }
+
+    &:active {
+        @include elevate(1);
+        transform: translateY(2px);
+    }
+
+
+    &__image {
+        padding-bottom: (100% / 1.4);
+        position: relative;
+        width: 100%;
+
+        img {
+            display: block;
+            height: 100%;
+            left: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+    } // __image
+}

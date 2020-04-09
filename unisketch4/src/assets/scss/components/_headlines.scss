@@ -1,0 +1,24 @@
+%headlines {
+    color: $color-headlines;
+    line-height: $lh-small;
+    margin: 0 0 0.75em;
+}
+
+h1 {
+    @extend %headlines;
+    font-size: $fs-large;
+}
+
+h2 {
+    @extend %headlines;
+    font-size: $fs-large;
+}
+
+h3 {
+    @extend %headlines;
+    font-size: $fs-medium;
+}
+
+h4 {
+    @extend %headlines;
+}

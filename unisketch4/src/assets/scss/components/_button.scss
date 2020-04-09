@@ -1,0 +1,131 @@
+.button {
+  @extend %button-reset;
+  @extend %uppercase;
+  align-items: center;
+  border: 3px solid;
+  border-radius: $border-radius;
+  color: $color-primary;
+  cursor: pointer;
+  display: flex;
+  font-weight: $fw-bold;
+  padding: $spacing-small $spacing-x-large;
+  text-align: center;
+  text-decoration: none;
+  transition: all $transition;
+
+
+  @include break(mobile) {
+    display: inline-block;
+  }
+
+
+  &:hover, &:focus {
+    text-decoration: none;
+    // transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    color: $color-disabled-base;
+    pointer-events: none;
+  }
+
+
+  &--small {
+    padding-left: $spacing-base;
+    padding-right: $spacing-base;
+  }
+
+
+  &--cta {
+    background: linear-gradient(135deg, $color-primary, $color-accent)
+      0 0 / 200% 100%;
+    border: 0;
+    color: $color-base-item;
+
+    &:hover, &:focus {
+      background-position: 50% 0;
+    }
+
+    &:disabled {
+        background: $color-disabled-base;
+        color: $color-base-item;
+    }
+  }
+
+  &--warning {
+    background: $color-warning;
+    border: 0;
+    color: $color-base-item;
+
+    &:hover, &:focus {
+        background: desaturate(lighten($color-warning, 5%), 5%);
+    }
+
+    &:active {
+        background: saturate(darken($color-warning, 5%), 0%);
+    }
+  }
+
+
+  &--flat {
+    background: transparent;
+    border: 0;
+    color: $color-text;
+  }
+
+
+  p + & {
+    margin: $spacing-large auto 0;
+  }
+
+
+  svg {
+    display: block;
+    height: $fs-large;
+    margin: ((1rem - $fs-large) / 2) 0 ((1rem - $fs-large) / 2 * 1.125);
+    width: $fs-large;
+  }
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+
+    .button + .button {
+        margin-top: $spacing-small;
+    }
+
+
+    @include break(mobile) {
+        flex-direction: row;
+
+
+        .button {
+            flex: 1 1 50%;
+        }
+
+        .button + .button {
+            margin-left: $spacing-small;
+            margin-top: 0;
+        }
+    }
+
+
+    .button:only-child {
+        flex: 1;
+    }
+
+
+    &--center {
+        align-items: center;
+        justify-content: center;
+
+        .button:only-child {
+            flex: 0 0 auto;
+        }
+    }
+}

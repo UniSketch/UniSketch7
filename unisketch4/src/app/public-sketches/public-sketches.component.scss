@@ -1,0 +1,49 @@
+//
+// Enter Container
+//
+
+@import "../../assets/scss/_utility";
+
+.sketch {
+    margin-bottom: 2rem;
+}
+
+.public-sketches {
+    background-color: $color-ui-base-soft;
+
+
+    &__title {
+        padding-left: $spacing-base;
+        padding-top: $spacing-base;
+        color: white;
+        margin: 0;
+        text-align: center;
+    }
+}
+
+
+
+.cards {
+    display: grid;
+    grid-gap: $spacing-base;
+    gap: $spacing-base;
+    grid-template-columns: repeat(1, 1fr);
+    padding: $spacing-x-large;
+
+
+    @include break(mobile) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include break(tablet) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include break(desktop) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include break(hd) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

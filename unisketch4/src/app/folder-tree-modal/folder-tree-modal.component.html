@@ -1,0 +1,29 @@
+<app-modal #folderModal>
+    <header class="app-modal-header">
+        <h3>New Folder</h3>
+        <p>Folders help you organize your sketches!</p>
+        <p>
+            <span class="msg msg--error" *ngIf="inputHasError">{{errorMessage}}</span>
+        </p>
+    </header>
+
+    <div class="app-modal-body form">
+        <div class="form__row">
+            <input type="text" placeholder="New Folder" autocomplete="false" id="nameinput" #nameInput
+                   (focus)="toggleInput()"
+                   (blur)="toggleInput()"
+                   (input)="updateInput()">
+            <label for="nameinput" class="label">Name of the new folder</label>
+
+
+        </div>
+        <div class="form__submit">
+            <button type="button" class="button button--warning" (click)="hide()">
+                Close
+            </button>
+            <button type="button" class="button button--cta" (click)="submit()">
+                Submit
+            </button>
+        </div>
+    </div>
+</app-modal>

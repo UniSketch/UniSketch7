@@ -1,0 +1,7 @@
+<aside class="notification-center" #container>
+
+    <app-notification class="notification"
+        *ngFor="let notification of notifications"
+        [notification]="notification">
+    </app-notification>
+</aside>

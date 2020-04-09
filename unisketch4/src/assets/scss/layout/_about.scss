@@ -1,0 +1,11 @@
+//
+// About Container
+//
+
+.about {
+  padding: $spacing-x-large 0 $spacing-section;
+
+  @include break(tablet) {
+    padding-top: $spacing-section;
+  }
+}

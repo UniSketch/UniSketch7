@@ -1,0 +1,81 @@
+@import "../../assets/scss/_utility";
+
+
+
+.sketch-view {
+  //  background: $color-base;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    overflow: hidden;
+    background: white !important;
+
+
+    .canvas-container {
+        cursor: default;
+        flex: 1;
+        overflow: scroll;
+        position: relative;
+        
+    }
+
+    .canvas {
+        
+        @include elevate(20);
+        display: block;
+        -webkit-user-drag: none;
+
+    .background {
+            fill: url(#grid) !important 
+    }
+    .grid {
+        fill: url(#tenthGrid) !important
+    }
+    .gridpathsmall {
+        fill: none !important;
+        stroke: silver !important;
+       
+    }
+
+    .gridpathbig {
+        fill: none !important;
+        stroke: gray !important;
+    }
+
+    .backgroundcolor {
+        fill: rgba(78, 92, 184, 0.8) !important
+    }
+        
+    }
+
+    .dragscroll {
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    .cursor {
+        background-color: currentColor;
+        border-radius: 50%;
+        height: 0.5rem;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 0.5rem;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.2;
+            height: 2.5rem;
+            width: 2.5rem;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<!-- Search Toolbar -->
+<aside class="tools">
+    
+    <button  class="icon-button tools__item"
+        title="New Folder"
+        (click)="tree.openNewFolderModal($event)">
+        <svg-icon src="assets/img/icons/add-folder-button.svg"></svg-icon>
+    </button>
+   
+    
+    <span class="tools__spacer tools__spacer--large"></span>
+    <span class="icon-button tools__item" id="search_svg">
+        <svg-icon src="assets/img/icons/search.svg"></svg-icon>
+    </span>
+   
+    <input type="text" class="tools__search"
+           placeholder="Search for sketches..."
+           #searchInput
+           (input)="searchBy(searchInput.value)"
+           >
+</aside>
+
+
+<!-- Library list -->
+
+<div class="libraryContainer">
+    <section class="folderTree">
+        <app-folder-tree #tree>
+        </app-folder-tree>
+    </section>
+    <div>
+        <!-- Filter -->
+        <div class="filter">
+            <span></span>
+            <p class="filter__results-info">{{ resultMessage }}</p>
+
+
+            <div class="filter__dropdown">
+                <strong class="label">Order By</strong>
+                <app-select
+                    [options]="sortOptions"
+                    (select)="updateSort($event, searchInput.value)"
+                ></app-select>
+            </div>
+        </div>
+        <section class="library">
+            <app-sketchcard #sketchcard
+                            (onDelete)="sketchDeleteEmitter(sketch)"
+                            *ngFor="let sketch of sketches"
+                            [sketch]="sketch"
+                            [showControls]=true
+            ></app-sketchcard>
+        </section>
+    </div>
+
+</div>
+
+<app-modal #modal>
+    <h3 class="app-modal-header">{{deleteTermHeader}} "{{sketchToDelete.title}}"?</h3>
+    <p class="app-modal-body">
+        Are you sure you want to {{deleteTerm}}?
+        <span *ngIf="sketchToDelete.is_owner; else collaboratornote">This will permanently delete the sketch from everyone's view.</span>
+        <ng-template #collaboratornote><span>It will only be removed from your view, others are still going to be able to access it.</span>
+        </ng-template>
+    </p>
+    <div class="app-modal-footer">
+        <button type="button" class="button button--flat" (click)="modal.hide()">Cancel</button>
+        <button type="button" class="button button--warning" (click)="deleteSketch()">Delete</button>
+    </div>
+</app-modal>
+
+

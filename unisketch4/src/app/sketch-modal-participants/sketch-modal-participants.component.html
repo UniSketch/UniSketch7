@@ -1,0 +1,83 @@
+<app-modal #modal>
+    <h3 class="app-modal-header">Collaborators</h3>
+
+
+    <div class="app-modal-body">
+
+        <div class="mb-3" *ngIf="sketchService.isSketchOwner()">
+            <label class="switch">
+                <input id="public-checkbox" type="checkbox" (click)="toggleVisibility($event)">
+                <span class="slider"></span>
+            </label>
+            <span>Share your creation with the world!</span>
+        </div>
+        <span *ngIf="!participants">Loading...</span>
+
+        <ul class="collaborators-list">
+            <li class="collaborators-list__item"
+                *ngFor="let participant of participants">
+                <div class="collaborators-list__item__info">
+                    <strong class="collaborators-list__item__name">{{ participant.name }}</strong>
+                    <span class="collaborators-list__item__mail" *ngIf="sketchService.isSketchOwner()">{{ participant.email_address }}</span>
+                </div>
+
+                <span *ngIf="sketchService.isSketchOwner(); then owner else notOwner"></span>
+                <ng-template #owner>
+
+                    <select class="collaborators-list__item__role custom-select"
+                            [disabled]="!sketchService.isSketchOwner() || isParticipantYourself(participant)"
+                            [(ngModel)]="participant.role"
+                            (ngModelChange)="onRoleSelected($event, participant)">
+                        <option *ngFor="let role of roles; let i = index"
+                                [ngValue]="i + 1">{{getRole(i+1)}}
+                        </option>
+                    </select>
+                </ng-template>
+
+                <ng-template #notOwner>
+                    <span class="collaborators-list__item__role">{{getRole(participant.role)}}</span>
+                </ng-template>
+            </li>
+        </ul>
+
+        <div class="collaborators-invite"
+             *ngIf="sketchService.isSketchOwner()">
+            <p>As the owner of this sketch, you can invite additional collaborators to work with you.</p>
+
+            <form class="form" name="form"
+                  (ngSubmit)="inviteForm.form.valid && inviteParticipant()"
+                  #inviteForm="ngForm"
+                  novalidate>
+
+                <div class="form__row">
+                    <span *ngIf="inviteForm.submitted && !email_address.valid" class="msg msg--error">E-Mail address is required.</span>
+
+                    <input name="email_address" type="email" placeholder="user@example.com"
+                           [(ngModel)]="newParticipant.email_address"
+                           #email_address="ngModel"
+                           required>
+                    <label class="label" for="invemail">E-Mail:</label>
+
+                    <app-select class="collaborators-invite__select"
+                                [options]="roles"
+                                (select)="newParticipant.role = getRoleId($event.value);">
+                    </app-select>
+                </div>
+
+                <div class="form__submit">
+                    <button class="button button--cta" type="submit">Grant Permission</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-modal-footer">
+        <p class="msg" *ngIf="saveMode === saveModeEnum.Saving">Saving changes...</p>
+        <p class="msg" *ngIf="saveMode === saveModeEnum.Saved">All changes saved.</p>
+        <p class="msg msg--error" *ngIf="saveMode === saveModeEnum.Errored">{{ errorText }}</p>
+
+        <button type="button" class="button button--flat"
+                (click)="modal.hide()">Close
+        </button>
+    </div>
+</app-modal>

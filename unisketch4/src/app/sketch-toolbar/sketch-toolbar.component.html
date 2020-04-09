@@ -1,0 +1,632 @@
+<!-- Header -->
+
+<header class="topbar">
+    <!-- Back to Dashboard -->
+    <div class="topbar__column">
+        <button class="button button--cta button--small" title="Back to Dashboard" (click)="backToDashboard()">
+            <svg-icon src="assets/img/icons/arrow-left.svg"></svg-icon>
+        </button>
+    </div>
+    <!-- Add Tag -->
+    <div class="topbar__column topbar__column--sketchtitle">
+
+        <button *ngIf="authService.loginCookieExists()" class="topbar__tags icon-button" title="Add a Tag"
+            (click)="tags_modal.show(sketchService.getSketch())">
+            <svg-icon src="assets/img/icons/tag.svg"></svg-icon>
+        </button>
+        <h1 class="topbar__title" #title placeholder="Sketch Title" (click)="handleTitleClick()"
+            (blur)="handleTitleBlur($event.target.innerText)" [contentEditable]="sketchService.isAllowedToDraw()"
+            spellcheck="false">{{ sketch.title }}</h1>
+    </div>
+    <!-- Profil Section -->
+    <div class="topbar__column">
+        <app-profile-summary *ngIf="authService.loginCookieExists()"></app-profile-summary>
+    </div>
+</header>
+
+<div class="view-container">
+    <!-- Toolbar -->
+    <aside class="tools">
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" title="Undo (Z)"
+            (click)="undo()" [disabled]="!isUndoable">
+            <svg-icon src="assets/img/icons/rotate-left.svg"></svg-icon>
+        </button>
+
+
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" title="Redo (Y)"
+            (click)="redo()" [disabled]="!isRedoable">
+            <svg-icon src="assets/img/icons/rotate-right.svg"></svg-icon>
+        </button>
+
+        <span class="tools__spacer"></span>
+
+        <!-- Zoom Out -->
+        <button class="icon-button tools__item" title="Zoom Out" (click)="zoomOut()" [disabled]="!canZoomOut">
+            <svg-icon src="assets/img/icons/magnify-minus.svg"></svg-icon>
+        </button>
+
+        <!-- Zoom In -->
+        <button class="icon-button tools__item" title="Zoom In" (click)="zoomIn()" [disabled]="!canZoomIn">
+            <svg-icon src="assets/img/icons/magnify-plus.svg"></svg-icon>
+        </button>
+
+        <span class="tools__spacer tools__spacer--large"></span>
+
+        <!-- Brush Menu -->
+        <div *ngIf="authService.loginCookieExists()" class="tools__item" #brushMenu (mouseenter)="toggleBrushStyleModal()"
+        (mouseleave)="toggleBrushStyleModal()">
+            <span class="brush-value"
+                  [ngStyle]="{ 'background-color': currentBrushColor }"></span>
+            <button class="icon-button"
+                    title="Select Brush (B)"
+                    (click)="selectBrush()"
+                    [ngClass]="{ active: isBrushSelected }"
+            >
+            
+                <svg-icon id="selectedBrush" [src]='currentBrushStyleIcons'></svg-icon>
+            </button>
+            <div class="tools__menu tools__menu--brush"
+            [ngClass]="{ visible: isBrushStyleModalVisible && isBrushSelected}">
+                <div class="tools__menu__body">
+                    <button id="normal" class="icon-button--dark icon-button" (click)="selectBrushStyle($event)">
+                        <svg-icon src="assets/img/icons/brush.svg" style="pointer-events: none;"></svg-icon>
+                    </button>
+                    <button id="graffiti" class="icon-button--dark icon-button" (click)="selectBrushStyle($event)">
+                        <svg-icon src="assets/img/icons/hair-spray-bottle-svgrepo-com.svg" style="pointer-events: none;"></svg-icon>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Background Menu -->
+        <div *ngIf="authService.loginCookieExists()" class="tools__item" #backgroundMenu>
+            <span class="brush-value" [ngStyle]="{ 'background-color': currentBackgroundColor }"></span>
+
+            <button class="icon-button" title="Fill Background (G)" (click)="selectBackground()"
+                [ngClass]="{ active: isBackgroundSelected }">
+                <svg-icon src="assets/img/icons/paint-bucket.svg"></svg-icon>
+            </button>
+
+        </div>
+
+        <!-- Text Menu -->
+        <div *ngIf="authService.loginCookieExists()" class="tools__item" #textMenu>
+            <span class="brush-value" [ngStyle]="{ 'background-color': currentTextColor }"></span>
+
+            <button class="icon-button tools__item" title="Insert Text (Space + T)" (click)="selectText()"
+                [ngClass]="{ active: isTextSelected }">
+                <svg-icon src="assets/img/icons/text-3.svg"></svg-icon>
+            </button>
+        </div>
+
+        <!-- Shape Menu -->
+        <div *ngIf="authService.loginCookieExists()" class="tools__item" #shapeMenu>
+
+            <span class="brush-value" [ngStyle]="{ 'background-color': currentShapeColor }"></span>
+            <span class="brush-value-right" [ngStyle]="{ 'background-color': currentShapeFill }"></span>
+
+            <button class="icon-button tools__item" title="Insert Shape (Space + S)" (click)="toggleShapeSettings()"
+                (click)="selectShape()" [ngClass]="{ active: isShapeSelected }">
+                <!-- TODO placeholder; use a real icon -->
+                <svg-icon src="assets/img/icons/shapes-icon-2.svg"></svg-icon>
+            </button>
+        </div>
+
+        <!-- Eraser -->
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" title="Select Eraser (E)"
+            (click)="selectEraser()" [ngClass]="{ active: isEraserSelected }">
+            <svg-icon src="assets/img/icons/eraser.svg"></svg-icon>
+        </button>
+      
+
+        <!-- Move -->
+        <!--
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" disabled
+                title="Move Canvas (Space + Mouse)"
+                [class.active]="isDragScrollActive"
+                (click)="selectHand()">
+            <svg-icon src="assets/img/icons/hand.svg"></svg-icon>
+        </button>
+        -->
+
+        <!-- Selector -->
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" title="Select Element(s)"
+            (click)="selectSelector()" [ngClass]="{ active: isSelectorSelected }">
+            <svg-icon src="assets/img/icons/select.svg"></svg-icon>
+        </button>
+
+
+
+        <app-image-upload></app-image-upload>
+
+
+        <span *ngIf="authService.loginCookieExists()" class="tools__spacer tools__spacer--border"></span>
+
+        <!-- Tool Settings -->
+        <div *ngIf="authService.loginCookieExists()" class="tools__settings">
+            <!-- Brush -->
+            <div class="tools__settings__group" [ngStyle]="{'visibility': isBrushSelected ? 'visible' : 'hidden'}">
+
+                <div class="tools__settings__group__item" (mouseenter)="toggleColorSettings()"
+                    (mouseleave)="toggleColorSettings()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/pantone.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexgrid"
+                        [ngClass]="{ visible: isColorSettingsVisible && isBrushSelected}">
+                        <div class="tools__menu__body">
+                            <span class="tools__menu__label">Color</span>
+                            <ul class="tools__menu__color-list">
+                                <li class="tools__menu__color" *ngFor="let color of colorPalette"
+                                    (click)="selectBrushColor(color)" [ngClass]="{ active: isCurrentBrushColor(color) }"
+                                    [ngStyle]="{ 'background-color': color }">
+                                    <button></button>
+                                </li>
+                            </ul>
+
+                            <span [style.background]="color" [cpWidth]="285" [cpToggle]="true" cpDialogDisplay="inline"
+                                (colorPickerChange)="selectBrushColor(currentBrushColor)"
+                                [(colorPicker)]="currentBrushColor"></span>
+
+                        </div>
+                    </div>
+
+                </div> <!-- tools__settings__group__item -->
+                
+                <!-- SIZE SLIDER -->
+                <div class="tools__settings__group__item" (mouseenter)="toggleBrushSizeModal()"
+                    (mouseleave)="toggleBrushSizeModal()" id="brushSizeSettings">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/brush-width.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isBrushSizeModalVisible && isBrushSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Size</span>
+                                <input class="number-input" type="number" min="1" max="50" ng-maxlength="2"
+                                    [(ngModel)]="currentBrushLineSize" (change)="selectBrushSize()">
+                            </div>
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                   min="1" max="50" step="1"
+                                   [(ngModel)]="currentBrushLineSize" (change)="selectBrushSize()">
+                            <div id="noDash" (click)="changeDashArray($event)">
+                                <svg-icon src="assets/img/icons/stroke-dasharray-normal.svg" style="pointer-events:  none;"></svg-icon>
+                            </div>
+                            <div id="smallDash" (click)="changeDashArray($event)">
+                                <svg-icon src="assets/img/icons/stroke-dasharray-5.5.svg" style="pointer-events:  none;"></svg-icon>
+                            </div>
+                            <div id="bigDash" (click)="changeDashArray($event)">
+                                <svg-icon src="assets/img/icons/stroke-dasharray-10.10.svg" style="pointer-events:  none;"></svg-icon>
+                            </div>
+                            <div id="randomDash" (click)="changeDashArray($event)">
+                                <svg-icon src="assets/img/icons/stroke-dasharray-20.10.5.5.5.10.svg" style="pointer-events:  none;"></svg-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OPACITY SLIDER -->
+                <div class="tools__settings__group__item" (mouseenter)="toggleBrushOpacityModal()"
+                    (mouseleave)="toggleBrushOpacityModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/transparency.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isBrushOpacityModalVisible && isBrushSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Opacity</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                    [(ngModel)]="currentBrushOpacity" (change)="selectBrushOpacity()">
+                            </div>
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                min="1" max="100" step="1" [(ngModel)]="currentBrushOpacity"
+                                (change)="selectBrushOpacity()">
+                            <div class="tools__menu--preview">
+                                <svg width="100%" height="50px">
+                                    <circle cx="100" cy="25" r="25" [attr.fill-opacity]="currentBrushOpacity/100" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- brush settings -->
+
+
+            <!-- Background -->
+            <div class="tools__settings__item" [ngStyle]="{'visibility': isBackgroundSelected ? 'visible' : 'hidden'}">
+
+                <div class="tools__settings__item" (mouseenter)="toggleBackgroundColorSettings()"
+                    (mouseleave)="toggleBackgroundColorSettings()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/pantone.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexgrid"
+                        [ngClass]="{ visible: isBackgroundColorSettingsVisible && isBackgroundSelected}">
+                        <div class="tools__menu__body">
+                            <span class="tools__menu__label">Background Color</span>
+                            <ul class="tools__menu__color-list">
+                                <li class="tools__menu__color" *ngFor="let color of colorPalette"
+                                    (click)="selectBackgroundColor(color)"
+                                    [ngClass]="{ active: isCurrentBackgroundColor(color) }"
+                                    [ngStyle]="{ 'background-color': color }">
+                                    <button></button>
+                                </li>
+                            </ul>
+
+                            <span [style.background]="color" [cpWidth]="285" [cpToggle]="true" cpDialogDisplay="inline"
+                                (colorPickerChange)="selectBackgroundColor(currentBackgroundColor)"
+                                [(colorPicker)]="currentBackgroundColor"></span>
+
+                        </div>
+                    </div>
+                </div> <!-- tools__settings__item -->
+            </div> <!-- background settings -->
+
+            <!-- Text -->
+            <div class="tools__settings__group" [ngStyle]="{'visibility': isTextSelected ? 'visible' : 'hidden'}">
+
+                <!-- TEXT COLOR-->
+                <div class="tools__settings__group__item" (mouseenter)="toggleTextColorSettings()"
+                    (mouseleave)="toggleTextColorSettings()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/pantone.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexgrid"
+                        [ngClass]="{ visible: isTextColorSettingsVisible && isTextSelected}">
+                        <div class="tools__menu__body">
+                            <span class="tools__menu__label">Text Color</span>
+                            <ul class="tools__menu__color-list">
+                                <li class="tools__menu__color" *ngFor="let color of colorPalette"
+                                    (click)="selectTextColor(color)" [ngClass]="{ active: isCurrentTextColor(color) }"
+                                    [ngStyle]="{ 'background-color': color }">
+                                    <button></button>
+                                </li>
+                            </ul>
+
+                            <span [style.background]="color" [cpWidth]="285" [cpToggle]="true" cpDialogDisplay="inline"
+                                (colorPickerChange)="selectTextColor(currentTextColor)"
+                                [(colorPicker)]="currentTextColor"></span>
+
+                        </div>
+                    </div>
+                </div> <!-- text color -->
+
+                <!-- TEXT INPUT
+                <div class="tools__settings__group__item" (mouseenter)="toggleTextInputModal()" (mouseleave)="toggleTextInputModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/text-editor.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--brush"
+                         [ngClass]="{ visible: isTextInputModalVisible && isTextSelected}">
+                        <div class="tools__menu__body">
+                            <textarea [(ngModel)]="currentTextInput"
+                                      (ngModelChange)="selectTextInput()"
+                                      class="tools__settings__textarea" maxlength="100" rows="3"
+                                      placeholder="Enter your text here"></textarea>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <!-- TEXT FONT-->
+                <div class="tools__settings__group__item" (mouseenter)="toggleTextFontModal()"
+                    (mouseleave)="toggleTextFontModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/text-3.svg"></svg-icon>
+                    </div>
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isTextFontModalVisible && isTextSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span class="tools__menu__label">Font</span>
+                            </div>
+                            <label class="tools__settings__radio" *ngFor="let font of fontFamilies">
+                                <input type="radio" [(ngModel)]="currentFontFamily" (change)="selectFontFamily()"
+                                    value="{{ font }}">
+                                <span>{{ font }}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEXT SIZE -->
+                <div class="tools__settings__group__item" (mouseenter)="toggleTextSizeModal()"
+                    (mouseleave)="toggleTextSizeModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/text-size-2.svg"></svg-icon>
+                    </div>
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isTextSizeModalVisible && isTextSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Size</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                    [(ngModel)]="currentTextSize" (change)="selectTextSize()">
+                            </div>
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                min="1" max="100" step="1" [(ngModel)]="currentTextSize" (change)="selectTextSize()">
+                            <div class="tools__menu--preview">
+                                <svg width="100%" height="80px">
+                                    <text x="5" y="75" [attr.font-size]="currentTextSize">Text</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- text size -->
+
+
+                <!-- TEXT OPACITY -->
+                <div class="tools__settings__group__item" (mouseenter)="toggleTextOpacityModal()"
+                    (mouseleave)="toggleTextOpacityModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/transparency.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isTextOpacityModalVisible && isTextSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Opacity</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                    [(ngModel)]="currentTextOpacity" (change)="selectTextOpacity()">
+                            </div>
+
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                min="1" max="100" step="1" [(ngModel)]="currentTextOpacity"
+                                (change)="selectTextOpacity()">
+                            <div class="tools__menu--preview">
+                                <svg width="100%" height="80px"> <text x="5" y="75" [attr.font-size]="100"
+                                        [attr.opacity]="currentTextOpacity/100">Text</text></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- text opacity -->
+            </div> <!-- text settings -->
+
+
+            <!-- Shape -->
+            <div class="tools__settings__group" [ngStyle]="{'visibility': isShapeSelected ? 'visible' : 'hidden'}">
+
+                <!-- Shape COLOR-->
+                <div class="tools__settings__group__item" (mouseenter)="toggleShapeColorSettings()"
+                    (mouseleave)="toggleShapeColorSettings()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/pantone.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--shape"
+                        [ngClass]="{ visible: isShapeColorSettingsVisible && isShapeSelected}">
+                        <div class="tools__menu__body">
+                            <span class="tools__menu__label">Border Color</span>
+                            <ul class="tools__menu__color-list">
+                                <li class="tools__menu__color" *ngFor="let color of colorPalette"
+                                    (click)="selectShapeColor(color)" [ngClass]="{ active: isCurrentShapeColor(color) }"
+                                    [ngStyle]="{ 'background-color': color }">
+                                    <button></button>
+                                </li>
+                            </ul>
+
+                            <span [style.background]="color" [cpWidth]="285" [cpToggle]="true" cpDialogDisplay="inline"
+                                (colorPickerChange)="selectShapeColor(currentShapeColor)"
+                                [(colorPicker)]="currentShapeColor"></span>
+
+                        </div>
+                        <div class="tools__menu__body">
+                            <span class="tools__menu__label">Fill Color</span>
+                            <ul class="tools__menu__color-list">
+                                <li class="tools__menu__color" *ngFor="let fill of colorPalette"
+                                    (click)="selectShapeFill(fill)" [ngClass]="{ active: isCurrentShapeFill(fill) }"
+                                    [ngStyle]="{ 'background-color': fill }">
+                                    <button></button>
+                                </li>
+                            </ul>
+
+                            <span [style.background]="fill" [cpWidth]="285" [cpToggle]="true" cpDialogDisplay="inline"
+                                (colorPickerChange)="selectShapeFill(currentShapeFill)"
+                                [(colorPicker)]="currentShapeFill"></span>
+
+                        </div>
+                    </div>
+                </div> <!-- shape color -->
+
+                <!-- Shape Type-->
+                <div class="tools__settings__group__item" (mouseenter)="toggleShapeTypeModal()"
+                    (mouseleave)="toggleShapeTypeModal()">
+
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/shapes-icon-2.svg"></svg-icon>
+                    </div>
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isShapeTypeModalVisible && isShapeSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span class="tools__menu__label">Type</span>
+                            </div>
+                            <label class="tools__settings__radio" *ngFor="let shape of shapeTypes">
+                                <input type="radio" [(ngModel)]="currentShapeType" (change)="selectShapeType()"
+                                    value="{{ shape }}">
+                                <span> {{ shape }}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Shape size -->
+                <div class="tools__settings__group__item" (mouseenter)="toggleShapeSizeModal()"
+                    (mouseleave)="toggleShapeSizeModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/brush-width.svg"></svg-icon>
+                    </div>
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isShapeSizeModalVisible && isShapeSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Border Width</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                    [(ngModel)]="currentShapeSize" (change)="selectShapeSize()">
+                            </div>
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                min="1" max="100" step="1" [(ngModel)]="currentShapeSize" (change)="selectShapeSize()">
+                        </div>
+                    </div>
+                </div> <!-- shape size -->
+
+                <!-- Shape opacity -->
+                <div class="tools__settings__group__item" (mouseenter)="toggleShapeOpacityModal()"
+                    (mouseleave)="toggleShapeOpacityModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/transparency.svg"></svg-icon>
+                    </div>
+
+                    <div class="tools__menu tools__menu--flexcol"
+                        [ngClass]="{ visible: isShapeOpacityModalVisible && isShapeSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Opacity</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                    [(ngModel)]="currentShapeOpacity" (change)="selectShapeOpacity()">
+                            </div>
+
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                min="0" max="100" step="1" [(ngModel)]="currentShapeOpacity"
+                                (change)="selectShapeOpacity()">
+                            <div class="tools__menu--preview">
+                                <svg width="100%" height="50px">
+                                    <circle cx="100" cy="25" r="25" [attr.fill-opacity]="currentShapeOpacity/100" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- shape opacity -->
+
+
+                <!-- Shape WIDTH
+                <div class="tools__settings__group__item" (mouseenter)="toggleShapeWidthModal()"
+                     (mouseleave)="toggleShapeWidthModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/pizza-triangle.svg"></svg-icon>s
+                    </div>
+                    <div class="tools__menu tools__menu--brush"
+                         [ngClass]="{ visible: isShapeWidthModalVisible && isShapeSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Width</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                       [(ngModel)]="currentShapeWidth" (change)="selectShapeWidth()">
+                            </div>
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                   min="1" max="100" step="1"
+                                   [(ngModel)]="currentShapeWidth" (change)="selectShapeWidth()">
+                        </div>
+                    </div>
+                </div>  shape size -->
+
+
+                <!-- Shape HEIGHT
+                <div class="tools__settings__group__item" (mouseenter)="toggleShapeHeightModal()"
+                     (mouseleave)="toggleShapeHeightModal()">
+                    <div class="icon-button tools__item">
+                        <svg-icon src="assets/img/icons/pizza-triangle.svg"></svg-icon>
+                    </div>
+                    <div class="tools__menu tools__menu--brush"
+                         [ngClass]="{ visible: isShapeHeightModalVisible && isShapeSelected}">
+                        <div class="tools__menu__body">
+                            <div class="input-container">
+                                <span>Height</span>
+                                <input class="number-input" type="number" min="1" max="100" ng-maxlength="3"
+                                       [(ngModel)]="currentShapeHeight" (change)="selectShapeHeight()">
+                            </div>
+                            <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
+                                   min="1" max="100" step="1"
+                                   [(ngModel)]="currentShapeHeight" (change)="selectShapeHeight()">
+                        </div>
+                    </div>
+                </div>  shape size -->
+
+            </div> <!-- shape settings -->
+        </div>
+
+
+        <span class="tools__spacer tools__spacer--large"></span>
+
+        <button class="icon-button tools__item" disabled></button>
+
+        <!-- Chat -->
+        <div class="tools__item tools__item--chat" #chat>
+            <button *ngIf="authService.loginCookieExists()" class="icon-button" title="Chat"
+                [class.active]="isChatVisible" [class.notification]="hasNewMessages" (click)="toggleChat($event)">
+                <svg-icon src="assets/img/icons/chat.svg"></svg-icon>
+            </button>
+
+            <app-chat-overlay class="tools__menu" [class.visible]="isChatVisible"></app-chat-overlay>
+        </div>
+
+
+        <!-- Grid Toggle-->
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" title="Toggle Grid (x)"
+            (click)="toggleGridVisibility()" [ngClass]="{ active: isGridSelected }">
+            <svg-icon src="assets/img/icons/grid-icon.svg"></svg-icon>
+        </button>
+
+        <!-- Download Menu-->
+        <div *ngIf="authService.loginCookieExists()" class="tools__settings__group__item"
+            (mouseenter)="toggleDownloadOptionsModal()" (mouseleave)="toggleDownloadOptionsModal()">
+
+            <div class="icon-button tools__item">
+                <svg-icon src="assets/img/icons/download.svg"></svg-icon>
+            </div>
+            <div class="tools__menu tools__menu--flexcol" [ngClass]="{ visible: isDownloadOptionsVisible}">
+                <div class="tools__menu__body">
+                    <div class="input-container">
+                        <span class="tools__menu__label">Download Format</span>
+                    </div>
+                    <label class="tools__settings__radio" *ngFor="let dtype of downloadTypes">
+                        <input type="radio" [(ngModel)]="currentDownloadType" (change)="selectDownloadType()"
+                            value="{{ dtype }}">
+                        <span> {{ dtype }}</span>
+                    </label>
+                </div>
+                <!-- Download Sketch -->
+                <a class="button button--cta button--small" title="Download your Sketch" (click)="downloadSketch()"
+                    #downloadButton
+                    >Download your File</a>
+            </div>
+        </div>
+
+
+
+        <!-- Participants -->
+        <button *ngIf="authService.loginCookieExists()" class="icon-button tools__item" title="Show Participants"
+            (click)="participants_modal.show(sketchService.getSketch())">
+            <svg-icon src="assets/img/icons/team.svg"></svg-icon>
+        </button>
+
+        <!-- Toggle Fullscreen -->
+        <button class="icon-button tools__item tools__item--fullscreen" title="Change Screenmode"
+            [class.active]="isFullscreenActive" (click)="toggleFullscreen()">
+            <svg-icon src="assets/img/icons/full-screen.svg"></svg-icon>
+            <svg-icon src="assets/img/icons/exit-full-screen.svg"></svg-icon>
+        </button>
+    </aside>
+</div>
+
+
+<!-- This modal will be displayed when the user clicks the participants button. -->
+<app-sketch-modal-participants #participants_modal></app-sketch-modal-participants>
+
+<!-- This modal will be displayed when the user clicks the tags button. -->
+<app-sketch-modal-tags #tags_modal (toggle)="handleToggleTagsModal($event)"></app-sketch-modal-tags>
+
+<!-- This is a hidden canvas used to downscale the image to be sent as a preview image to the server. -->
+<canvas #previewCanvas class="hidden" width="256" height="256"></canvas>

@@ -1,0 +1,106 @@
+@import "../../assets/scss/_utility";
+
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    text-align: left;
+    width: 48 * 4 * 2px;
+
+
+    &::before {
+        border-radius: $border-radius;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom, white, transparent 100%);
+        height: 40px;
+        position: absolute;
+        content: '';
+        width: 100%;
+        z-index: 999;
+    }
+
+
+    &__view {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+
+    &__messages,
+    &__write {
+        padding: 0 $spacing-base;
+    }
+
+
+    &__messages {
+        max-height: 57vh;
+        overflow-y: auto;
+        padding-top: $spacing-base * 1.5;
+    }
+
+
+    &__write {
+        box-shadow: 0 -10px 40px -0 white;
+        display: flex;
+        margin-top: auto;
+        position: relative;
+
+        &__input {
+            border: 0;
+            box-sizing: content-box;
+            font: inherit;
+            height: $fs-base * 1.3 * 2;
+            line-height: 1.3;
+            outline: 0;
+            padding: $spacing-base $spacing-x-small $spacing-x-small;
+            resize: none;
+            width: 100%;
+        }
+
+
+        &__button {
+            color: $color-text-soft;
+            margin-top: $spacing-x-small;
+
+            &:hover {
+                color: $color-primary;
+            }
+        }
+    }
+}
+
+
+.chatMessage {
+    $background: mix($color-base-soft, $color-base-item);
+
+    margin-bottom: $spacing-base;
+    background: $background;
+    border-radius: 3px;
+    color: $color-headlines;
+    padding: $spacing-x-small $spacing-small $spacing-small;
+    position: relative;
+
+
+    &__text {
+        margin-bottom: 0;
+    }
+
+
+    &__userName {
+        color: $color-headlines;
+        font-weight: bold;
+        margin-bottom: 0.35em;
+    }
+
+
+    &.own {
+        background-color: $color-primary;
+        color: darken($color-primary, 30%);
+    }
+}

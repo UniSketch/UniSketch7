@@ -1,0 +1,30 @@
+$color-primary:         #26de81;
+$color-secondary:       #00ffd7;
+$color-accent:          $color-secondary;
+$color-active:          $color-primary;
+
+$color-headlines:       #121418;
+$color-text:            #3d4959;
+$color-text-soft:       #a5b1c2;
+
+$color-base:            #fafafa;
+$color-base-item:       #ffffff;
+$color-base-soft:       #d1d8e0;
+$color-ui-base:         $color-headlines;
+$color-ui-base-soft:    #2f3134;
+
+$color-inactive:        #7d8086;
+$color-disabled:        #61656f;
+$color-disabled-base:   $color-base-soft;
+
+$color-success:         $color-primary;
+$color-warning:         #ff4c7b;
+$color-orange:          #ffa14c;
+
+
+$primary: $color-primary;
+$secondary: $color-secondary;
+$success: $color-primary;
+$danger: $color-warning;
+$warning: $color-orange;
+$dark: $color-ui-base;

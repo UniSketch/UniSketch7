@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="4" d="M18 62H2V46" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="4" d="M62 46v16H46" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="4" d="M46 2h16v16" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="4" d="M2 18V2h16m24 40l20 20M2 2l20 19.998" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="4" d="M22 42.006L2 62M62 2L42 22" stroke-linejoin="miter" stroke-linecap="butt"></path>
+</svg>

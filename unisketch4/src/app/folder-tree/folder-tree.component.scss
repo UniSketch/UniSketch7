@@ -1,0 +1,70 @@
+@import '~angular-tree-component/dist/angular-tree-component.css';
+
+#treeContainer {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 20px;
+    //font-weight: bold;
+}
+
+.menu {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+
+    & ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    & li {
+        padding: 7px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    & li:hover {
+        background-color: aliceblue;
+    }
+
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+div.node-content-wrapper {
+    background: #fafafa;
+    box-shadow: none;
+    border: 3px solid #fafafa;
+    -webkit-border-radius: .3rem;
+    -moz-border-radius: .3rem;
+    border-radius: .3rem;
+    &.node-content-wrapper-focused {
+        border-color: #26de81;
+        background: #fafafa;
+        &.node-content-wrapper-active {
+            &:hover {
+                background: #fafafa;
+            }
+        }
+        &:hover {
+            border-color: #26de81;
+        }
+        &.is-dragging-over {
+            background: #fafafa;
+        }
+    }
+    &:hover {
+        border-color: #26de81;
+    }
+    &.is-dragging-over {
+        box-shadow: none;
+        background: #26de81;
+        border-color: #26de81;
+    }
+}

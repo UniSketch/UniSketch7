@@ -1,0 +1,28 @@
+<div class="sketch" [treeDrag]="sketch"
+     [treeDragEnabled]="true" (click)="onClick($event)">
+    <div class="sketch__image">
+        <img [src]="previewUrl">
+    </div>
+
+    <div class="sketch__body">
+        <div class="sketch__body__text">
+            <h3 class="sketch__title">{{sketch.title}}</h3>
+            <span class="sketch__updated">{{ sketch.updated_at | date:"dd.MM.yyyy 'at' hh:mma"}}</span>
+        </div>
+
+        <ul *ngIf="showControls" class="sketch__body__controls">
+            <button class="icon-button sketch__action"
+                    aria-hidden="true"
+                    (click)="onTagsClick($event)">
+                <svg-icon src="assets/img/icons/tag.svg"></svg-icon>
+            </button>
+            <button class="icon-button sketch__action"
+                    aria-hidden="true"
+                    (click)="onDeleteClick($event)">
+                <svg-icon src="assets/img/icons/delete.svg"></svg-icon>
+            </button>
+        </ul>
+    </div>
+</div>
+
+<app-sketch-modal-tags *ngIf="showControls" #tags_modal></app-sketch-modal-tags>

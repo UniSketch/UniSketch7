@@ -1,0 +1,41 @@
+.user-summary {
+    align-items: center;
+    display: flex;
+    margin: $spacing-x-large 0 $spacing-section;
+
+
+    &__image {
+        border-radius: 50%;
+        display: block;
+        height: 64px;
+        width: 64px;
+
+
+        &--placeholder {
+            background: $color-base-soft;
+        } // --placeholder
+
+
+        &-wrap {
+            margin-right: $spacing-base;
+        } // -wrap
+
+    } // __image
+
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        line-height: $lh-small;
+
+        &__name {
+            color: $color-headlines;
+        } // __name
+
+
+        &__email {
+            color: $color-text-soft;
+        }
+
+    } // __info
+}

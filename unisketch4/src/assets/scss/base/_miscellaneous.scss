@@ -1,0 +1,9 @@
+//
+// Ungroupable variables
+
+$transition-duration:   0.4s !default;
+$transition-easing:     ease-out !default;
+$transition:            $transition-duration $transition-easing !default;
+$transition-bounce:     $transition-duration * 1.5 cubic-bezier(0.68, -0.55, 0.265, 1.55) !default;
+
+$border-radius:         4px;
