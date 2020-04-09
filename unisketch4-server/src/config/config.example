@@ -1,0 +1,38 @@
+{
+  "development": {
+    "port": 8147,
+    "mail_host": "smtp.sendgrid.net",
+    "mail_user": "unisketch_htw",
+    "mail_email": "unisketch@htw-berlin.de",
+    "mail_password": "siehe Dokumentation",
+    "mail_port": "587",
+    "mail_proxy": "",
+    "session_secret": "1234",
+    "password_reset_token_expiration_time": 7200000,
+    "base_path": "/unisketch8/"
+  },
+  "test": {
+    "port": 8147,
+    "mail_host": "smtp.sendgrid.com",
+    "mail_user": "unisketch_htw",
+    "mail_email": "unisketch@htw-berlin.de",
+    "mail_password": "siehe Dokumentation",
+    "mail_port": "587",
+    "mail_proxy": "",
+    "session_secret": "1234",
+    "password_reset_token_expiration_time": 7200000,
+    "base_path": "/unisketch8/"
+  },
+  "production": {
+    "port": 8147,
+    "mail_host": "smtp.sendgrid.com",
+    "mail_user": "unisketch_htw",
+    "mail_email": "unisketch@htw-berlin.de",
+    "mail_password": "siehe Dokumentation",
+    "mail_port": "587",
+    "mail_proxy": "",
+    "session_secret": "1234",
+    "password_reset_token_expiration_time": 7200000,
+    "base_path": "/unisketch8/"
+  }
+}

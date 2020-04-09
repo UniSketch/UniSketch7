@@ -1,0 +1,59 @@
+{
+  "development": {
+    "type": "postgres",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "username": "",
+    "password": "",
+    "database": "unisketch8_development",
+    "synchronize": true,
+    "logging": true,
+    "entities": [
+      "src/models/**/*.ts"
+    ],
+    "migrations": [
+      "src/migration/**/*.ts"
+    ],
+    "subscribers": [
+      "src/subscriber/**/*.ts"
+    ]
+  },
+  "test": {
+    "type": "postgres",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "",
+    "password": "",
+    "database": "unisketch8_test",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+      "src/models/**/*.ts"
+    ],
+    "migrations": [
+      "src/migration/**/*.ts"
+    ],
+    "subscribers": [
+      "src/subscriber/**/*.ts"
+    ]
+  },
+  "production": {
+    "type": "postgres",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "",
+    "password": "",
+    "database": "unisketch8",
+    "synchronize": false,
+    "logging": false,
+    "entities": [
+      "src/models/**/*.ts"
+    ],
+    "migrations": [
+      "src/migration/**/*.ts"
+    ],
+    "subscribers": [
+      "src/subscriber/**/*.ts"
+    ]
+  }
+}
