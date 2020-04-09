@@ -59,7 +59,8 @@ export class SVGRenderer implements IRenderer {
 
     constructor(sketchService: SketchService) {
         this.sketchService = sketchService;
-        this.defaultLayer = SVGElementFactory.createElement('g', {id: "gtag"} as ISVGOptions);
+        this.defaultLayer = SVGElementFactory.createElement('g', {} as ISVGOptions);
+        this.defaultLayer.setAttribute('id', 'def-layer');  //temp 
     }
 
     public redraw() {
@@ -116,21 +117,19 @@ export class SVGRenderer implements IRenderer {
     }
 
     public updateGrid(visible:boolean) {
-        let grid =  document.getElementById('element1');
+        
+        let grid =  document.getElementById('gridback');
         let backcolor = document.getElementById('element0');
         if(visible) {
             grid.setAttribute('visibility', 'visible');
+            console.log(grid);
             backcolor.setAttribute('visibility', 'hidden');
         }else {
             grid.setAttribute('visibility', 'hidden');
+            console.log(grid);
             backcolor.setAttribute('visibility', 'visible');
-        }
-
-        
-       
+        }   
     }
-
-
 
     public hexToRGBA(hex, opacity) {
         return 'rgba(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length/3 + '})', 'g')).map(function(l) { return parseInt(hex.length%2 ? l+l : l, 16) }).concat(opacity||1).join(',') + ')';
@@ -140,8 +139,8 @@ export class SVGRenderer implements IRenderer {
         return SVGElementFactory.createElement('rect', {
             x: 0,
             y: 0,
-            width: '100%',
-            height: '100%',
+            width: this.sketchService.originalCanvasSize.width,
+            height: this.sketchService.originalCanvasSize.height,
             fill: color,
             id: 'element0'
         } as ISVGOptions);
@@ -151,10 +150,10 @@ export class SVGRenderer implements IRenderer {
         return SVGElementFactory.createElement('rect', {
             x: 0,
             y: 0,
-            width: '100%',
-            height: '100%',
+            width: this.sketchService.originalCanvasSize.width,
+            height: this.sketchService.originalCanvasSize.height,
             fill: "url(#grid)",
-            id: 'element1'
+            id: 'gridback'
         } as ISVGOptions);
     }
 
@@ -205,6 +204,9 @@ export class SVGRenderer implements IRenderer {
     }
 
     public reRenderElement(element: SketchElement) {
+
+        this.updateGrid(this.sketchService.gridVisible);
+        
         const elem = document.getElementById('element' + element.id);
         if (elem === undefined || elem === null) {
             console.log('element with id ' + element.id + ' not found');
@@ -254,16 +256,35 @@ export class SVGRenderer implements IRenderer {
                 if (element.type === 'rect') {
                     elem.setAttribute('x', element.pos_x.toString());
                     elem.setAttribute('y', element.pos_y.toString());
-                } else {
+                    
+                }
+                else if (element.type === 'polygon') {
+                    let points = '';
+                    points = element.pos_x.toString() + ',' + element.pos_y.toString() + ' ';
+                    if (element.mirrored_x && element.mirrored_y) {
+                        points += (element.pos_x - element.width).toString() + ',' + element.pos_y.toString() + ' ';
+                        points += (element.pos_x - element.width / 2).toString() + ',' + (element.pos_y - element.height).toString();
+                    }else if (element.mirrored_y) {
+                        points += (element.pos_x + element.width).toString() + ',' + element.pos_y.toString() + ' ';
+                        points += (element.pos_x + element.width / 2).toString() + ',' + (element.pos_y - element.height).toString();
+                    }else if (element.mirrored_x) {
+                        points += (element.pos_x - element.width).toString() + ',' + element.pos_y.toString() + ' ';
+                        points += (element.pos_x - element.width / 2).toString() + ',' + (element.pos_y + element.height).toString();
+                    }else {
+                        points += (element.pos_x + element.width).toString() + ',' + element.pos_y.toString() + ' ';
+                        points += (element.pos_x + element.width / 2).toString() + ',' + (element.pos_y + element.height).toString();
+                    }
+                    elem.setAttribute('points', points);
+                }
+                 else {
                     elem.setAttribute('cx', element.pos_x.toString());
                     elem.setAttribute('cy', element.pos_y.toString());
+                    
                     if (element.type === 'circle') {
                         elem.setAttribute('r', (element.width / 2).toString());
                     } else if (element.type === 'ellipse') {
                         elem.setAttribute('rx', (element.width / 2).toString());
                         elem.setAttribute('ry', (element.height / 2).toString());
-                    }else if (element.type === 'polygon') {
-                        elem.setAttribute('points', element.pos_x.toString());
                     }
                 }
             }

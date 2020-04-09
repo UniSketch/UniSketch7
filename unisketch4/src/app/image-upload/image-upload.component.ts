@@ -1,6 +1,7 @@
 import {Component, OnInit, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {SketchService} from '../services/sketch.service';
+import {SketchToolbarComponent} from "../sketch-toolbar/sketch-toolbar.component";
 
 @Component({
     selector: 'app-image-upload',
@@ -22,7 +23,7 @@ export class ImageUploadComponent implements OnInit {
      */
     private isPictureModalVisible = false;
 
-    constructor(private sketchService: SketchService, private authService: AuthenticationService, private renderer: Renderer2) {
+    constructor(private sketchService: SketchService, private sketchToolbarComponent: SketchToolbarComponent, private authService: AuthenticationService, private renderer: Renderer2) {
     }
 
     ngOnInit() {
@@ -69,7 +70,7 @@ export class ImageUploadComponent implements OnInit {
             if (img.height > maxHeight) {
                 this.sketchService.imageWidth = maxHeight;
             }
-            this.renderer.setAttribute(this.imagePreviewSrc.nativeElement, 'width', this.sketchService.imageWidth + 'px');
+            this.renderer.setAttribute(this.imagePreviewSrc.nativeElement, 'width', this.sketchService.imageWidth * this.sketchToolbarComponent.zoomLevel + 'px');
         });
     }
 

@@ -10,4 +10,9 @@ export class ToolBackground extends SketchTool {
         super(sketchService);
     }
 
+    setCursor(): void {
+        const sketchArea = document.getElementById('canvas');
+        sketchArea.style.cursor = 'default';
+    }
+
 }

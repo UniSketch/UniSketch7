@@ -1,11 +1,9 @@
-import {Component, ViewChild, ElementRef, OnInit, OnDestroy, AfterViewInit, HostListener} from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
-import {Observable} from 'rxjs';
-
-import {SketchService} from '../services/sketch.service';
-import {NotificationService} from '../services/notification.service';
-import {AuthenticationService} from '../services/authentication.service'
-
+import { Component, ViewChild, ElementRef, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Observable } from 'rxjs';
+import { SketchService } from '../services/sketch.service';
+import { NotificationService } from '../services/notification.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 declare var dragscroll: any;
 
@@ -39,12 +37,12 @@ export class SketchViewComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * Dynamic width of the canvas.
      */
-    private canvasWidth = 1920;
+    private canvasWidth = 40920;
 
     /**
      * Dynamic height of the canvas.
      */
-    private canvasHeight = 1020;
+    private canvasHeight = 40020;
 
     private canvasViewBox = `0 0 ${this.canvasWidth} ${this.canvasHeight}`;
 
@@ -83,9 +81,14 @@ export class SketchViewComponent implements OnInit, AfterViewInit, OnDestroy {
             this.isDragScrollActive = value;
         });
 
+        // this.originalCanvasSize = {
+        //     width: this.containerRef.nativeElement.getBoundingClientRect().width,
+        //     height: this.containerRef.nativeElement.getBoundingClientRect().height
+        // };
+
         this.originalCanvasSize = {
-            width: this.containerRef.nativeElement.getBoundingClientRect().width,
-            height: this.containerRef.nativeElement.getBoundingClientRect().height
+            width: this.canvasWidth,
+            height: this.canvasHeight,
         };
 
         // Hand the initial canvas size over to the sketch service
@@ -96,6 +99,9 @@ export class SketchViewComponent implements OnInit, AfterViewInit, OnDestroy {
             this.cursors = cursors;
         });
 
+
+
+        
         this.resizeCanvas();
         //this.monitorMouse();
     }
@@ -108,14 +114,13 @@ export class SketchViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         // Make sure to disconnect when the component is destroyed. 
-       
-        if(this.authenticationService.isLoggedIn()){
+
+        if (this.authenticationService.isLoggedIn()) {
             this.notificationService.create(`${this.sketchService.getSketch().title} has been saved.`, 'success');
-        }        
+        }
         this.sketchService.disconnect();
         this.sketchService.getRenderer().clear();
     }
-
 
     /**
      * Evaluates the dimensions of the canvas container and sets the
@@ -127,7 +132,7 @@ export class SketchViewComponent implements OnInit, AfterViewInit, OnDestroy {
         this.canvasHeight = this.containerRef.nativeElement
             .getBoundingClientRect().height;
 
-        //TODO might rework 0 0 to work with moving internally!
+        // TODO might rework 0 0 to work with moving internally!
         this.canvasViewBox = `0 0 ${this.canvasWidth} ${this.canvasHeight}`;
     }
 

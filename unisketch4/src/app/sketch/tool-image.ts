@@ -13,7 +13,9 @@ export class ToolImage extends SketchTool {
     constructor(sketchService: SketchService) {
         super(sketchService);
         this.subscription.add(this.sketchService.onConfirmElement.subscribe((data) => {
+            console.log(data);
             if (data['element_id'] && data['type'] && data['type'] === SketchElementType.Image) {
+                console.log(data);
                 this.image.id = data['element_id'];
                 this.sketchService.getSketch().sketchElements.push(this.image);
                 this.sketchService.redrawSketch();
@@ -27,6 +29,7 @@ export class ToolImage extends SketchTool {
     }
 
     startStroke(mousePos: any) {
+        console.log('image paste')
         this.createImage(mousePos);
         this.sketchService.sendImage(this.image);
 

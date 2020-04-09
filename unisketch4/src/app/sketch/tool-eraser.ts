@@ -33,4 +33,9 @@ export class ToolEraser extends SketchTool {
             this.sketchService.redrawSketch();
         }
     }
+
+    setCursor(): void {
+        const sketchArea = document.getElementById('canvas');
+        sketchArea.style.cursor = `url('/assets/img/eraser_tool_cursor.png') 10 10, default`;
+    }
 }

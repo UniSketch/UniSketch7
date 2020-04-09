@@ -185,10 +185,13 @@ export class SketchService {
     public toolSelector = new ToolSelector(this);
 
     /**
-     * Instance of the eraser tool.
+     * Instance of the text tool.
      */
     public toolText = new ToolText(this);
 
+    /**
+     * Instance of the shape tool.
+     */
     public toolShape = new ToolShape(this);
 
     public toolImage = new ToolImage(this);
@@ -202,7 +205,6 @@ export class SketchService {
      * The currently selected tool.
      */
     public currentTool: SketchTool = this.toolBrush;
-
 
     /**
      * The current color of the brush as a hex string.
@@ -344,7 +346,6 @@ export class SketchService {
         this.originalCanvasSize = size;
     }
 
-
     /**
      * Returns the observable of the dragscroll subject.
      */
@@ -381,7 +382,6 @@ export class SketchService {
 
         setTimeout(dragscroll.reset, 50);
     }
-
 
     /**
      * Connects to the websocket server and joins the given sketch id.
@@ -445,7 +445,6 @@ export class SketchService {
         this.socket.on('confirm_element', (data) => {
             this.onConfirmElement.next(data);
         });
-
 
         this.socket.on('delete_element', (data) => {
             this.onDeleteElement.next(data);
@@ -524,6 +523,8 @@ export class SketchService {
                 }
             });
         });
+
+        this.changeCanvasZoomLevel(1);
     }
 
     /**
@@ -745,7 +746,6 @@ export class SketchService {
     setDownloadType(type: DownloadType) {
         this.downloadType = type;
     }
-
 
     /**
      * Updates the sketch's background color to the given hex string.

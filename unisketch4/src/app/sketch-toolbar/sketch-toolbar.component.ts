@@ -18,6 +18,7 @@ import { resolve } from 'url';
     styleUrls: ['./sketch-toolbar.component.scss'],
     providers: [DashboardService]
 })
+
 export class SketchToolbarComponent implements OnInit, OnDestroy {
 
     /**
@@ -137,9 +138,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     private currentShapeFillColor = '#000000FF';
 
     /**
-     * Saves the current brush size, additionally to the service
+     * Saves the current line brush size, additionally to the service
      */
-    private currentBrushSize = 1;
+    private currentBrushLineSize = 1;
 
     /**
      * Saves the current brush transparency, additionally to the service
@@ -266,7 +267,6 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     private isShapeSizeModalVisible = false;
     private isShapeOpacityModalVisible = false;
 
-
     /**
      * The current title of the sketch.
      * TODO: cleanup potential, updateTitle could receive a string
@@ -298,14 +298,16 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     /**
      * Determines the current zoom level (1 is minimum)
      */
-    private zoomLevel = 1;
+    public zoomLevel = 1;
 
     /**
      * Determines the maximum allowed zoom level.
      * Note: Zooming scales the canvas element up and it becomes harder
      * to handle due to immense pixel sizes; so limit it.
      */
-    private maxZoomLevel = 6;
+    private maxZoomLevel = 7;
+
+    private minZoomLevel = 1;
 
     /**
      * For number input, saves mouse x pos when drag is started.
@@ -368,7 +370,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         if (event.target === this.brushSizeRef.nativeElement) {
             this.mousePosXOnDragStart = event.clientX;
             this.changeBrushSize = true;
-            this.startDragToolValue = this.currentBrushSize;
+            this.startDragToolValue = this.currentBrushLineSize;
         } else if (event.target === this.opacityRef.nativeElement) {
             this.mousePosXOnDragStart = event.clientX;
             this.changeOpacity = true;
@@ -386,7 +388,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             diff = this.startDragToolValue + diff;
             diff = diff > 50 ? 50 : diff;
             diff = diff < 0 ? 0 : diff;
-            this.currentBrushSize = diff;
+            this.currentBrushLineSize = diff;
             this.sketchService.setBrushSize(diff)
         } else if (this.changeOpacity) {
             let diff = (event.clientX - this.mousePosXOnDragStart) * 2;
@@ -529,7 +531,6 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         }
     }
 
-
     /**
      * Returns the name of the image export file.
      */
@@ -581,8 +582,15 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         this.currentBrushStyle = (event.target as HTMLInputElement).id;
         this.sketchService.setBrushStyle((event.target as HTMLInputElement).id);
         if (this.currentBrushStyle === 'normal') {
+            // this.sketchService.currentTool = this.sketchService.toolBrush;
+            // this.sketchService.setBrushSize(this.currentBrushLineSize);
+            this.sketchService.setBrushSize(this.currentBrushLineSize);
+            document.getElementById('brushSizeSettings').style.display = 'block';
+            this.selectBrush();
             this.currentBrushStyleIcons = "assets/img/icons/brush.svg"
         } else if (this.currentBrushStyle === 'graffiti') {
+            document.getElementById('brushSizeSettings').style.display = 'none';
+            this.sketchService.setBrushSize(1);
             this.currentBrushStyleIcons = "assets/img/icons/hair-spray-bottle-svgrepo-com.svg"
         }
     }
@@ -591,13 +599,13 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
      * Changes the current brush size to the current range input value.
      */
     private selectBrushSize() {
-        if (this.currentBrushSize < 1) {
-            this.currentBrushSize = 1;
+        if (this.currentBrushLineSize < 1) {
+            this.currentBrushLineSize = 1;
         }
-        if (this.currentBrushSize > 50) {
-            this.currentBrushSize = 50;
+        if (this.currentBrushLineSize > 50) {
+            this.currentBrushLineSize = 50;
         }
-        this.sketchService.setBrushSize(this.currentBrushSize);
+        this.sketchService.setBrushSize(this.currentBrushLineSize);
     }
 
     /**
@@ -745,6 +753,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectTextTool();
             this.deselectImageTool();
             this.sketchService.currentTool = this.sketchService.toolBrush;
+            this.sketchService.toolBrush.setCursor();
         }
     }
 
@@ -763,7 +772,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectSelector();
             this.deselectTextTool();
             this.deselectImageTool();
+            this.sketchService.toolBrush.deselect();
             this.sketchService.currentTool = this.sketchService.toolBackground;
+            this.sketchService.toolBackground.setCursor();
         }
     }
 
@@ -809,7 +820,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectHand(this.sketchService.toolText);
             this.deselectSelector();
             this.deselectImageTool();
+            this.sketchService.toolBrush.deselect();
             this.sketchService.currentTool = this.sketchService.toolText;
+            this.sketchService.toolText.setCursor();
         }
     }
 
@@ -820,7 +833,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectHand(this.sketchService.toolShape);
             this.deselectSelector();
             this.deselectImageTool();
+            this.sketchService.toolBrush.deselect();
             this.sketchService.currentTool = this.sketchService.toolShape;
+            this.sketchService.toolShape.setCursor();
         }
     }
 
@@ -971,7 +986,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         this.deselectSelector();
         this.deselectTextTool();
         this.deselectImageTool();
+        this.sketchService.toolBrush.deselect();
         this.sketchService.currentTool = this.sketchService.toolEraser;
+        this.sketchService.toolEraser.setCursor();
     }
 
     /**
@@ -980,7 +997,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     private selectSelector() {
         this.deselectHand(this.sketchService.toolEraser);
         this.deselectTextTool();
+        this.sketchService.toolBrush.deselect();
         this.sketchService.currentTool = this.sketchService.toolSelector;
+        this.sketchService.toolSelector.setCursor();
     }
 
     /**
@@ -992,6 +1011,10 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
 
     private deselectImageTool() {
         this.sketchService.toolImage.deselect();
+    }
+
+    private deselectBrushTool() {
+        this.sketchService.toolBrush.deselect();
     }
 
     private deselectTextTool() {
@@ -1123,7 +1146,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
                 this.renderer.setStyle(loadingContainerEle, 'display', 'none');
                 const name = this.sketchTitle.replace(/[^a-zA-Z0-9-_.]/g, '');
                 this.sketchService.downloadSketchURL(name);
-               
+
             });
         });
     }
@@ -1177,7 +1200,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
 
             const loadingEle: HTMLElement = document.getElementById('cssload-loader');
             this.renderer.setStyle(loadingEle, 'display', 'block');
-          
+
 
             const loadingContainerEle: HTMLElement = document.getElementById('cssload-container');
             this.renderer.setStyle(loadingContainerEle, 'display', 'block');
@@ -1191,13 +1214,13 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
                     reader.readAsDataURL(blob);
                 }));
 
-           
+
             const sketchService = this.sketchService;
-            
+
             (async function loop() {
                 for (let i = 0; i < sketchElements.length; i++) {
                     await new Promise(resolve => {
-                        
+
                         if (sketchElements[i] instanceof ImageType) {
                             const image = sketchElements[i] as ImageType;
                             if (image.src.includes('/unisketch7/api/images/')) {
@@ -1218,9 +1241,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
                         resolveAllConverted();
                     }
                 }
-            
+
             })();
-            
+
         });
 
     }
@@ -1256,6 +1279,10 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             });
         } else {
             this.router.navigate(['/dashboard']);
+        }
+
+        if(this.sketchService.gridVisible) {
+            this.sketchService.toggleGrid();
         }
     }
 
@@ -1310,7 +1337,12 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
      */
     private zoomIn() {
         if (this.canZoomIn) {
-            this.sketchService.changeCanvasZoomLevel(++this.zoomLevel);
+            if (this.zoomLevel + 1 > this.maxZoomLevel) {
+                this.zoomLevel = this.maxZoomLevel;
+                this.sketchService.changeCanvasZoomLevel(this.zoomLevel);
+            } else {
+                this.sketchService.changeCanvasZoomLevel(++this.zoomLevel);
+            }
         }
     }
 
@@ -1319,8 +1351,26 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
      */
     private zoomOut() {
         if (this.canZoomOut) {
-            this.sketchService.changeCanvasZoomLevel(--this.zoomLevel);
+            if (this.zoomLevel - 1 < this.minZoomLevel) {
+                this.zoomLevel = this.minZoomLevel;
+                this.sketchService.changeCanvasZoomLevel(this.zoomLevel);
+            } else {
+                this.sketchService.changeCanvasZoomLevel(--this.zoomLevel);
+            }
         }
+    }
+
+    /**
+     * Zooms in/out of the sketch, with a range input.
+     */
+    private zoomWithSlider(event) {
+        let sliderValue = this.castStringInputToNumber(event);
+        this.zoomLevel = sliderValue;
+        this.sketchService.changeCanvasZoomLevel(this.zoomLevel);
+    }
+
+    private castStringInputToNumber(toCast) {
+        return Number((toCast.target as HTMLInputElement).value);
     }
 
     /**

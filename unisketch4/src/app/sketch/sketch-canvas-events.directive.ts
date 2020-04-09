@@ -305,8 +305,6 @@ export class SketchCanvasEventsDirective implements OnInit, OnDestroy {
 
         // Only start the stroke if there isn't one already in progress - unless the canvas is being re-entered.
         if (!this.isMouseDown || force) {
-            //this.sketchService.currentTool.startStroke(mousePos);
-            //this.sketchService.currentTool.startGraffiti(mousePos);
             if (this.sketchService.brushStyle === "normal") {
                 this.sketchService.currentTool.startStroke(mousePos);
             } else if (this.sketchService.brushStyle === "graffiti") {
@@ -411,6 +409,7 @@ export class SketchCanvasEventsDirective implements OnInit, OnDestroy {
         this.stopMouseTouch();
         if (this.isInsideCanvas) {
             if (this.sketchService.currentTool === this.sketchService.toolImage) {
+                this.sketchService.toolBrush.deselect();
                 this.sketchService.toolImage.enableImagePreviewDiv();
                 this.sketchService.toolImage.disableCursor();
             }
