@@ -118,6 +118,7 @@ export namespace SVGElementFactory {
                 
             }
         }
+        console.log("Here we are");
         return group;
     }
 
@@ -144,8 +145,7 @@ export namespace SVGElementFactory {
         } as ISVGOptions);
     }
 
-   /* export function createTriangleFromLine(line: Line): SVGElement {
-        console.log('triangle');
+    export function createTriangleFromLine(line: Line): SVGElement {
         return makeElement('polygon', {
             x: line.vertices[0].x,
             y: line.vertices[0].y,
@@ -155,7 +155,7 @@ export namespace SVGElementFactory {
             id: `element${line.id}`,
 
         }as ISVGOptions);
-    }*/
+    }
 
 
     export function createImage(image: Image): SVGElement {
@@ -227,13 +227,12 @@ export namespace SVGElementFactory {
                 }else if (shape.mirrored_y) {
                     options.points += (shape.pos_x + shape.width).toString() + ',' + shape.pos_y.toString() + ' ';
                     options.points += (shape.pos_x + shape.width / 2).toString() + ',' + (shape.pos_y - shape.height).toString();
-                
                 }else if (shape.mirrored_x) {
                     options.points += (shape.pos_x - shape.width).toString() + ',' + shape.pos_y.toString() + ' ';
                     options.points += (shape.pos_x - shape.width / 2).toString() + ',' + (shape.pos_y + shape.height).toString();
                 }else {
                     options.points += (shape.pos_x + shape.width).toString() + ',' + shape.pos_y.toString() + ' ';
-                    options.points += (shape.pos_x + shape.width / 2).toString() + ',' + (shape.pos_y + shape.height).toString(); 
+                    options.points += (shape.pos_x + shape.width / 2).toString() + ',' + (shape.pos_y + shape.height).toString();
                 }
                 break;
             default:
@@ -312,12 +311,15 @@ export namespace SVGElementFactory {
                 pointsString += (vertices[i].x+ Math.sin(Math.floor(Math.random() * (360 - 0 + 1) + 0))*10) + ',' + (vertices[i].y + Math.sin(Math.floor(Math.random() * (360 - 0 + 1) + 0))*10);
             }
         }
+        console.log("Here we are");
         return pointsString;
     }
 
     function makeElement(type: string, options: ISVGOptions): SVGElement {
         const elem = document.createElementNS('http://www.w3.org/2000/svg', type);
+        console.log(elem);
         for (const prop in options) {
+
             if (prop) {
                 switch (prop) {
                     case 'type':

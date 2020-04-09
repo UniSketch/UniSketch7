@@ -116,16 +116,13 @@ export class SVGRenderer implements IRenderer {
     }
 
     public updateGrid(visible:boolean) {
-        
-        let grid =  document.getElementById('gridback');
+        let grid =  document.getElementById('element1');
         let backcolor = document.getElementById('element0');
         if(visible) {
             grid.setAttribute('visibility', 'visible');
-            console.log(grid);
             backcolor.setAttribute('visibility', 'hidden');
         }else {
             grid.setAttribute('visibility', 'hidden');
-            console.log(grid);
             backcolor.setAttribute('visibility', 'visible');
         }
 
@@ -157,7 +154,7 @@ export class SVGRenderer implements IRenderer {
             width: '100%',
             height: '100%',
             fill: "url(#grid)",
-            id: 'gridback'
+            id: 'element1'
         } as ISVGOptions);
     }
 
@@ -208,9 +205,6 @@ export class SVGRenderer implements IRenderer {
     }
 
     public reRenderElement(element: SketchElement) {
-
-        this.updateGrid(this.sketchService.gridVisible);
-        
         const elem = document.getElementById('element' + element.id);
         if (elem === undefined || elem === null) {
             console.log('element with id ' + element.id + ' not found');
@@ -260,35 +254,16 @@ export class SVGRenderer implements IRenderer {
                 if (element.type === 'rect') {
                     elem.setAttribute('x', element.pos_x.toString());
                     elem.setAttribute('y', element.pos_y.toString());
-                    
-                }
-                else if (element.type === 'polygon') {
-                    let points = '';
-                    points = element.pos_x.toString() + ',' + element.pos_y.toString() + ' ';
-                    if (element.mirrored_x && element.mirrored_y) {
-                        points += (element.pos_x - element.width).toString() + ',' + element.pos_y.toString() + ' ';
-                        points += (element.pos_x - element.width / 2).toString() + ',' + (element.pos_y - element.height).toString();
-                    }else if (element.mirrored_y) {
-                        points += (element.pos_x + element.width).toString() + ',' + element.pos_y.toString() + ' ';
-                        points += (element.pos_x + element.width / 2).toString() + ',' + (element.pos_y - element.height).toString();
-                    }else if (element.mirrored_x) {
-                        points += (element.pos_x - element.width).toString() + ',' + element.pos_y.toString() + ' ';
-                        points += (element.pos_x - element.width / 2).toString() + ',' + (element.pos_y + element.height).toString();
-                    }else {
-                        points += (element.pos_x + element.width).toString() + ',' + element.pos_y.toString() + ' ';
-                        points += (element.pos_x + element.width / 2).toString() + ',' + (element.pos_y + element.height).toString();
-                    }
-                    elem.setAttribute('points', points);
-                }
-                 else {
+                } else {
                     elem.setAttribute('cx', element.pos_x.toString());
                     elem.setAttribute('cy', element.pos_y.toString());
-                    
                     if (element.type === 'circle') {
                         elem.setAttribute('r', (element.width / 2).toString());
                     } else if (element.type === 'ellipse') {
                         elem.setAttribute('rx', (element.width / 2).toString());
                         elem.setAttribute('ry', (element.height / 2).toString());
+                    }else if (element.type === 'polygon') {
+                        elem.setAttribute('points', element.pos_x.toString());
                     }
                 }
             }

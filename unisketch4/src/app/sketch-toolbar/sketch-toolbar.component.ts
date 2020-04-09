@@ -137,9 +137,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     private currentShapeFillColor = '#000000FF';
 
     /**
-     * Saves the current line brush size, additionally to the service
+     * Saves the current brush size, additionally to the service
      */
-    private currentBrushLineSize = 1;
+    private currentBrushSize = 1;
 
     /**
      * Saves the current brush transparency, additionally to the service
@@ -368,7 +368,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         if (event.target === this.brushSizeRef.nativeElement) {
             this.mousePosXOnDragStart = event.clientX;
             this.changeBrushSize = true;
-            this.startDragToolValue = this.currentBrushLineSize;
+            this.startDragToolValue = this.currentBrushSize;
         } else if (event.target === this.opacityRef.nativeElement) {
             this.mousePosXOnDragStart = event.clientX;
             this.changeOpacity = true;
@@ -386,7 +386,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             diff = this.startDragToolValue + diff;
             diff = diff > 50 ? 50 : diff;
             diff = diff < 0 ? 0 : diff;
-            this.currentBrushLineSize = diff;
+            this.currentBrushSize = diff;
             this.sketchService.setBrushSize(diff)
         } else if (this.changeOpacity) {
             let diff = (event.clientX - this.mousePosXOnDragStart) * 2;
@@ -581,15 +581,8 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         this.currentBrushStyle = (event.target as HTMLInputElement).id;
         this.sketchService.setBrushStyle((event.target as HTMLInputElement).id);
         if (this.currentBrushStyle === 'normal') {
-            // this.sketchService.currentTool = this.sketchService.toolBrush;
-            // this.sketchService.setBrushSize(this.currentBrushLineSize);
-            this.sketchService.setBrushSize(this.currentBrushLineSize);
-            document.getElementById('brushSizeSettings').style.display = 'block';
-            this.selectBrush();
             this.currentBrushStyleIcons = "assets/img/icons/brush.svg"
         } else if (this.currentBrushStyle === 'graffiti') {
-            document.getElementById('brushSizeSettings').style.display = 'none';
-            this.sketchService.setBrushSize(1);
             this.currentBrushStyleIcons = "assets/img/icons/hair-spray-bottle-svgrepo-com.svg"
         }
     }
@@ -598,13 +591,13 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
      * Changes the current brush size to the current range input value.
      */
     private selectBrushSize() {
-        if (this.currentBrushLineSize < 1) {
-            this.currentBrushLineSize = 1;
+        if (this.currentBrushSize < 1) {
+            this.currentBrushSize = 1;
         }
-        if (this.currentBrushLineSize > 50) {
-            this.currentBrushLineSize = 50;
+        if (this.currentBrushSize > 50) {
+            this.currentBrushSize = 50;
         }
-        this.sketchService.setBrushSize(this.currentBrushLineSize);
+        this.sketchService.setBrushSize(this.currentBrushSize);
     }
 
     /**
@@ -752,7 +745,6 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectTextTool();
             this.deselectImageTool();
             this.sketchService.currentTool = this.sketchService.toolBrush;
-            this.sketchService.toolBrush.setCursor();
         }
     }
 
@@ -771,9 +763,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectSelector();
             this.deselectTextTool();
             this.deselectImageTool();
-            this.sketchService.toolBrush.deselect();
             this.sketchService.currentTool = this.sketchService.toolBackground;
-            this.sketchService.toolBackground.setCursor();
         }
     }
 
@@ -819,9 +809,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectHand(this.sketchService.toolText);
             this.deselectSelector();
             this.deselectImageTool();
-            this.sketchService.toolBrush.deselect();
             this.sketchService.currentTool = this.sketchService.toolText;
-            this.sketchService.toolText.setCursor();
         }
     }
 
@@ -832,9 +820,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             this.deselectHand(this.sketchService.toolShape);
             this.deselectSelector();
             this.deselectImageTool();
-            this.sketchService.toolBrush.deselect();
             this.sketchService.currentTool = this.sketchService.toolShape;
-            this.sketchService.toolShape.setCursor();
         }
     }
 
@@ -985,9 +971,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
         this.deselectSelector();
         this.deselectTextTool();
         this.deselectImageTool();
-        this.sketchService.toolBrush.deselect();
         this.sketchService.currentTool = this.sketchService.toolEraser;
-        this.sketchService.toolEraser.setCursor();
     }
 
     /**
@@ -996,9 +980,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     private selectSelector() {
         this.deselectHand(this.sketchService.toolEraser);
         this.deselectTextTool();
-        this.sketchService.toolBrush.deselect();
         this.sketchService.currentTool = this.sketchService.toolSelector;
-        this.sketchService.toolSelector.setCursor();
     }
 
     /**
@@ -1010,10 +992,6 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
 
     private deselectImageTool() {
         this.sketchService.toolImage.deselect();
-    }
-
-    private deselectBrushTool() {
-        this.sketchService.toolBrush.deselect();
     }
 
     private deselectTextTool() {
@@ -1278,10 +1256,6 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             });
         } else {
             this.router.navigate(['/dashboard']);
-        }
-
-        if(this.sketchService.gridVisible) {
-            this.sketchService.toggleGrid();
         }
     }
 

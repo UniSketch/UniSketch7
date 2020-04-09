@@ -160,11 +160,6 @@ export class ToolShape extends SketchTool {
         this.height = height;
     }
 
-    setCursor() {
-        const sketchArea = document.getElementById('canvas');
-        sketchArea.style.cursor = 'crosshair';
-    }
-
     /**
      * Call this when selecting different tool or leaving sketch.
      */

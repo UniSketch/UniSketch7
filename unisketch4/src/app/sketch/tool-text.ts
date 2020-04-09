@@ -83,11 +83,6 @@ export class ToolText extends SketchTool {
         }
     }
 
-    setCursor() {
-        const sketchArea = document.getElementById('canvas');
-        sketchArea.style.cursor = 'text';
-    }
-
     findText(position: any): any {
         const allElements = this.sketchService.getSketch()
             .getAllElements();

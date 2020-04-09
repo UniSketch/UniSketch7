@@ -177,7 +177,7 @@
                 
                 <!-- SIZE SLIDER -->
                 <div class="tools__settings__group__item" (mouseenter)="toggleBrushSizeModal()"
-                    (mouseleave)="toggleBrushSizeModal()" id="brushSizeSettings">
+                    (mouseleave)="toggleBrushSizeModal()">
                     <div class="icon-button tools__item">
                         <svg-icon src="assets/img/icons/brush-width.svg"></svg-icon>
                     </div>
@@ -188,11 +188,11 @@
                             <div class="input-container">
                                 <span>Size</span>
                                 <input class="number-input" type="number" min="1" max="50" ng-maxlength="2"
-                                    [(ngModel)]="currentBrushLineSize" (change)="selectBrushSize()">
+                                    [(ngModel)]="currentBrushSize" (change)="selectBrushSize()">
                             </div>
                             <input class="tools__settings__range tools__settings__range__horizontal-slider" type="range"
                                    min="1" max="50" step="1"
-                                   [(ngModel)]="currentBrushLineSize" (change)="selectBrushSize()">
+                                   [(ngModel)]="currentBrushSize" (change)="selectBrushSize()">
                             <div id="noDash" (click)="changeDashArray($event)">
                                 <svg-icon src="assets/img/icons/stroke-dasharray-normal.svg" style="pointer-events:  none;"></svg-icon>
                             </div>

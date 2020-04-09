@@ -69,42 +69,7 @@ export class Shape extends PositionedSketchElement {
             } else {
                 return false;
             }
-        
-        }
-        else if (this.type === 'polygon') {
-            if (this.mirrored_x && this.mirrored_y) {
-
-                if ( clickPos.x <= this.pos_x + offset
-                    &&  clickPos.x >= this.pos_x - width - offset 
-                    &&  clickPos.y >= this.pos_y - height - offset
-                    &&  clickPos.y <= this.pos_y + offset) {
-                    return true;
-                }
-            }else if (this.mirrored_y) {
-
-                if (clickPos.x >= this.pos_x - offset
-                    && clickPos.x <= this.pos_x + width + offset
-                    && clickPos.y >= this.pos_y - height - offset 
-                    && clickPos.y <= this.pos_y + offset) {
-                    return true;
-                }
-            }else if (this.mirrored_x) {
-
-                if (clickPos.x <= this.pos_x + offset
-                    &&  clickPos.x >= this.pos_x - width - offset 
-                    && clickPos.y <= this.pos_y + height + offset
-                    && clickPos.y >= this.pos_y - offset) {
-                    return true;
-                }
-            }else {
-                //GEHT
-                if (this.pos_x - offset <= clickPos.x && this.pos_x + width + offset >= clickPos.x && this.pos_y + height + offset >= clickPos.y && this.pos_y - offset <= clickPos.y) {
-                    return true;
-                }
-            }
-            return false;
-
-        }else {
+        } else {
             if (this.pos_x - offset - (width / 2) <= clickPos.x
                 && this.pos_x + (width / 2) + offset >= clickPos.x
                 && this.pos_y + (height / 2) + offset >= clickPos.y
@@ -114,11 +79,6 @@ export class Shape extends PositionedSketchElement {
                 return false;
             }
         }
-
-
-
-
-        
     }
 
     /**
@@ -156,7 +116,6 @@ export class Shape extends PositionedSketchElement {
             this.pos_y = fixedSide.y + yDiffScaled;
             this.height *= yFactor;
         }
-
     }
 
     public floorWidth() {

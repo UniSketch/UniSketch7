@@ -394,15 +394,11 @@ export class ToolSelector extends SketchTool {
     addElementsWithinRadius() {
         const sketch: any = this.sketchService.getSketch();
         const allElements: SketchElement[] = sketch.getAllElements();
-
-        
         const alreadySelected: SketchElement[] = [];
         let newSelected = 0;
         const radius = 5;
 
         for (let i = 0; i < allElements.length; i++) {
-
-            console.log(allElements[i]);
             if (allElements[i].isWithinRadius(radius, this.startPoint)) {
                 if (!this.selectedElements.has(allElements[i])) {
                     this.selectedElements.add(allElements[i]);
@@ -581,15 +577,12 @@ export class ToolSelector extends SketchTool {
     getMaxOutVertices(): Vertex[] {
         let vertices: Vertex[] = [];
         const elements: SketchElement[] = Array.from(this.selectedElements);
-        
 
         for (let i = 0; i < elements.length; i++) {
-
             if (elements[i] instanceof Line) {
                 const outerVerts = this.getOuterVertices(elements[i].getPos(), elements[i].width);
                 vertices.push(outerVerts[0]);
                 vertices.push(outerVerts[1]);
-
             } else if (elements[i] instanceof Text) {
                 const elem = document.getElementById('element' + elements[i].id);
                 const width = elem.getClientRects()[0].width;
@@ -598,7 +591,6 @@ export class ToolSelector extends SketchTool {
 
                 vertices.push(new Vertex(elements[i].getPos().x, elements[i].getPos().y + height + offset_fix));
                 vertices.push(new Vertex(elements[i].getPos().x + width, elements[i].getPos().y + offset_fix));
-
             } else if (elements[i] instanceof Shape) {
                 const elem = document.getElementById('element' + elements[i].id);
                 const width = elem.getClientRects()[0].width;
@@ -610,31 +602,7 @@ export class ToolSelector extends SketchTool {
                 if ((elements[i] as Shape).type === 'rect') {
                     vertices.push(new Vertex(elements[i].getPos().x - xFix, elements[i].getPos().y + height - yFix));
                     vertices.push(new Vertex(elements[i].getPos().x + width - xFix, elements[i].getPos().y - yFix));
-
-                }else if((elements[i] as Shape).type === 'polygon')  {
-
-                    let shape = (elements[i] as Shape);
-                    if(shape.mirrored_x && shape.mirrored_y) {
-                    
-                        vertices.push(new Vertex(elements[i].getPos().x - xFix, elements[i].getPos().y - height - yFix));
-                        vertices.push(new Vertex(elements[i].getPos().x - width - xFix, elements[i].getPos().y - yFix));
-
-                    }else if(shape.mirrored_x) {
-                    
-                        vertices.push(new Vertex(elements[i].getPos().x - xFix, elements[i].getPos().y + height - yFix));
-                        vertices.push(new Vertex(elements[i].getPos().x - width - xFix, elements[i].getPos().y - yFix));
-                    }
-                    else if(shape.mirrored_y) {
-                        
-                        vertices.push(new Vertex(elements[i].getPos().x - xFix, elements[i].getPos().y - height - yFix));
-                        vertices.push(new Vertex(elements[i].getPos().x + width - xFix, elements[i].getPos().y - yFix));
-                    }
-                    else {
-                        vertices.push(new Vertex(elements[i].getPos().x - xFix, elements[i].getPos().y + height - yFix));
-                        vertices.push(new Vertex(elements[i].getPos().x + width - xFix, elements[i].getPos().y - yFix));
-                    }
-                }
-                else {
+                } else {
                     vertices.push(new Vertex(elements[i].getPos().x - (width / 2), elements[i].getPos().y + height - (height / 2)));
                     vertices.push(new Vertex(elements[i].getPos().x + width - (width / 2), elements[i].getPos().y - (height / 2)));
                 }
@@ -657,7 +625,6 @@ export class ToolSelector extends SketchTool {
                 vertices.push(new Vertex(elements[i].getPos().x, elements[i].getPos().y + height + offset_fix));
                 vertices.push(new Vertex(elements[i].getPos().x + width, elements[i].getPos().y + offset_fix));
             }
-            
             }
 
         // lets filter the most outer vertices of all outer vertices
@@ -745,8 +712,6 @@ export class ToolSelector extends SketchTool {
      */
     setCursor() {
         const sketchArea = document.getElementById('canvas');
-
-        sketchArea.style.cursor = 'default';
 
         if (this.isCtrlDown && !this.isShiftDown) {
             sketchArea.style.cursor = 'copy';

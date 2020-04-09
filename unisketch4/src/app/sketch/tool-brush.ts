@@ -1,11 +1,11 @@
-import { SketchService } from '../services/sketch.service';
-import { Line } from '../models/line.model';
-import { Vertex } from '../models/vertex.model';
-import { SketchTool } from './tool';
-import { LineMathHelper } from '../line-math-helper';
-import { SVGElementFactory } from "./svg-element-factory";
-import { JSONHelper } from "../helpers/JSONHelper";
-import { SketchElementType } from "../helpers/SketchElementType";
+import {SketchService} from '../services/sketch.service';
+import {Line} from '../models/line.model';
+import {Vertex} from '../models/vertex.model';
+import {SketchTool} from './tool';
+import {LineMathHelper} from '../line-math-helper';
+import {SVGElementFactory} from "./svg-element-factory";
+import {JSONHelper} from "../helpers/JSONHelper";
+import {SketchElementType} from "../helpers/SketchElementType";
 import { single } from 'rxjs/operators';
 
 /**
@@ -79,7 +79,7 @@ export class ToolBrush extends SketchTool {
         // Invoked when a line is deleted. Removes the line from the model and redraws the sketch.
         this.subscription.add(this.sketchService.onDeleteElement.subscribe((data) => {
             if (this.activeLine === this.sketchService.getSketch()
-                .getElementById(data['element_id'])) {
+                                        .getElementById(data['element_id'])) {
                 this.cancelStroke();
             }
         }));
@@ -93,7 +93,7 @@ export class ToolBrush extends SketchTool {
 
         if (this.batchIntervalHandle) {
             clearInterval(this.batchIntervalHandle);
-        } 
+        }
 
         if (this.batchInterval > 0) {
             this.batchIntervalHandle = setInterval(() => this.flushVertexBatch(), this.batchInterval);
@@ -124,12 +124,13 @@ export class ToolBrush extends SketchTool {
     getGraffitiVertices(line: Line, mousePos: any) {
         //vertices: Vertex[] = [];
         for (let i = 0; i < 5; i++) {
-
-            line.vertices.push(new Vertex(mousePos.x - this.randomiseCirclePos(), mousePos.y - this.randomiseCirclePos()))
+            
+            line.vertices.push(new Vertex(mousePos.x- this.randomiseCirclePos(), mousePos.y- this.randomiseCirclePos()))
         }
     }
 
-    startGraffiti(mousePos: any) {
+    startGraffiti(mousePos:any)
+    {
         //draw a single graffiti point
         /*for (let i = 0; i < 100
             ; i++){
@@ -147,7 +148,6 @@ export class ToolBrush extends SketchTool {
         this.randomiseGraffitiCircle(mousePos.x, mousePos.y);
         line.vertices.push(new Vertex(mousePos.x, mousePos.y));
         line.dasharray = this.sketchService.dasharray;
-        line.brushStyle = this.sketchService.brushStyle;
         line.color = this.sketchService.brushColor;
         line.width = this.sketchService.brushWidth;
         this.unconfirmedLines.push(line);
@@ -156,16 +156,17 @@ export class ToolBrush extends SketchTool {
 
     randomiseGraffitiCircle(mousePosX: any, mousePosY: any) {
         for (let i = 0; i < 100; i++) {
-            let xCoord: number = mousePosX + Math.sin(Math.floor(Math.random() * (360 - 0 + 1) + 0)) * 10;
-            let yCoord: number = mousePosY + Math.cos(Math.floor(Math.random() * (360 - 0 + 1) + 0)) * 10;
+            let xCoord: number = mousePosX+Math.sin(Math.floor(Math.random() * (360 - 0 + 1) + 0))*10;
+            let yCoord: number = mousePosY+Math.cos(Math.floor(Math.random() * (360 - 0 + 1) + 0))*10;
 
-            if (Math.pow((xCoord - mousePosX), 2) + Math.pow((yCoord - mousePosY), 2) < Math.pow(10, 2)) {
-                this.activeLineElement = this.sketchService.renderPoint(xCoord, yCoord, this.sketchService.brushColor, this.sketchService.brushWidth);
+            if (Math.pow((xCoord - mousePosX),2) + Math.pow((yCoord - mousePosY), 2) < Math.pow(10, 2)) {
+                this.activeGraffitiElement = this.sketchService.renderPoint(xCoord, yCoord, this.sketchService.brushColor, this.sketchService.brushWidth);
             }
         }
     }
 
-    randomiseCirclePos() {
+    randomiseCirclePos()
+    {
         return Math.floor(Math.random() * (10 - (-10) + 1) + (-10));
     }
 
@@ -223,7 +224,8 @@ export class ToolBrush extends SketchTool {
         }
     }
 
-    continueGraffitiLine(mousePos: any, prevMousePos: any): void {
+    continueGraffitiLine(mousePos: any, prevMousePos: any) : void
+    {
         const vertex = new Vertex(mousePos.x, mousePos.y);
         /*for (let i = 0; i < 100; i++){
             this.activeLineElement = this.sketchService.renderPoint(mousePos.x- this.randomiseCirclePos(), mousePos.y- this.randomiseCirclePos(), this.sketchService.brushColor, this.sketchService.brushWidth);
@@ -284,16 +286,11 @@ export class ToolBrush extends SketchTool {
     stopStroke(): void {
         // Send remaining vertices of this line to the server and stop drawing
         this.flushVertexBatch();
+    }
+
+    stopGraffiti(): void {
         this.flushGraffiti();
     }
-
-    deselect() {
-        this.sketchService.brushStyle = 'normal';
-    }
-
-    // stopGraffiti(): void {
-
-    // }
 
     /**
      * Sends the vertices in the vertex batch to the server and clears it.
@@ -305,7 +302,8 @@ export class ToolBrush extends SketchTool {
         }
     }
 
-    private flushGraffiti() {
+    private flushGraffiti()
+    {
         if (this.vertexBatch.length > 0) {
             this.sketchService.continueLine(this.vertexBatch);
             this.vertexBatch = [];
