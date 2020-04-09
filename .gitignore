@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea/
+/gen/
+/art/
+/unisketch4-server/src/config/config.json
+/unisketch4-server/src/config/database.json
+.DS_Store
