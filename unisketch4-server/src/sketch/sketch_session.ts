@@ -254,13 +254,19 @@ export class SketchSession {
 
         //Check if Image already exists
         const fs = require('fs');
-        const dir = fs.opendirSync('src/images/');
+
+        var dirr = 'images/';
+
+        if (!fs.existsSync(dirr)){
+            fs.mkdirSync(dirr);
+        }
+        const dir = fs.opendirSync('images/');
         let dirFile;
         let imageExists = false;
         while ((dirFile = dir.readSync()) !== null) {
             try {
                 if (!dirFile.isDirectory()) {
-                    const data = fs.readFileSync('src/images/' + dirFile.name, 'base64');
+                    const data = fs.readFileSync('images/' + dirFile.name, 'base64');
                     if (base64Data == data.toString()) {
                         filename = dirFile.name;
                         imageExists = true;
@@ -275,7 +281,7 @@ export class SketchSession {
 
         //save Image
         if (!imageExists) {
-            const imageSavePath = 'src/images/' + filename;
+            const imageSavePath = 'images/' + filename;
             fs.writeFileSync(imageSavePath, base64Data, 'base64');
         }
 

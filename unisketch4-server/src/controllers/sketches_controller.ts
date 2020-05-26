@@ -295,7 +295,7 @@ export namespace SketchesController {
             res.sendFile(__dirname + '/no_preview.png');
         } else {
             //res.end(Buffer.from(sketch.preview, 'base64'));
-            res.sendFile(path.resolve('src/images/previews/'+sketch.id+'.png'));
+            res.sendFile(path.resolve('previews/'+sketch.id+'.png'));
         }
     }
 
@@ -338,7 +338,7 @@ export namespace SketchesController {
             res.sendFile(__dirname + '/no_preview.png');
         } else {
             //res.end(Buffer.from(sketch.preview, 'base64'));
-            res.sendFile(path.resolve('src/images/previews/'+sketch.id+'.png'));
+            res.sendFile(path.resolve('previews/'+sketch.id+'.png'));
         }
     }
 
@@ -401,9 +401,16 @@ export namespace SketchesController {
         //Gen Filename
         let filename = sketch.id + '.png';
 
-        const fs = require('fs');
+        var fs = require('fs');
+        var dir = 'previews/';
 
-        const imageSavePath = 'src/images/previews/' + filename;
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+
+
+        const imageSavePath = 'previews/' + filename;
+
         fs.writeFileSync(imageSavePath, base64Data, 'base64');
 
         sketch.preview = new Date().getTime().toString();
@@ -412,6 +419,8 @@ export namespace SketchesController {
 
         res.json({success: true});
     }
+
+
 
     /**
      * This generates a random sketch with the given amount of lines and vertices per line.
