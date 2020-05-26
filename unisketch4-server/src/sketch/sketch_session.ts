@@ -260,30 +260,12 @@ export class SketchSession {
         if (!fs.existsSync(dirr)){
             fs.mkdirSync(dirr);
         }
-        const dir = fs.opendirSync('images/');
-        let dirFile;
-        let imageExists = false;
-        while ((dirFile = dir.readSync()) !== null) {
-            try {
-                if (!dirFile.isDirectory()) {
-                    const data = fs.readFileSync('images/' + dirFile.name, 'base64');
-                    if (base64Data == data.toString()) {
-                        filename = dirFile.name;
-                        imageExists = true;
-                        break;
-                    }
-                }
-            } catch (e) {
-                console.log('Error:', e.stack);
-            }
-        }
-        dir.closeSync(dirFile);
+
 
         //save Image
-        if (!imageExists) {
-            const imageSavePath = 'images/' + filename;
-            fs.writeFileSync(imageSavePath, base64Data, 'base64');
-        }
+        const imageSavePath = 'images/' + filename;
+        fs.writeFileSync(imageSavePath, base64Data, 'base64');
+
 
         //set image path to server path
         newImage.src = '/unisketch7/api/images/' + filename;
