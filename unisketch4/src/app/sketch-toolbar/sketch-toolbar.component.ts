@@ -1139,13 +1139,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
     private downloadSketch() {
         this.convertImagesToBase64().then(result => {
             this.setImageHeights().then(res => {
-                const loadingEle: HTMLElement = document.getElementById('cssload-loader');
-                this.renderer.setStyle(loadingEle, 'display', 'none');
-                const loadingContainerEle: HTMLElement = document.getElementById('cssload-container');
-                this.renderer.setStyle(loadingContainerEle, 'display', 'none');
                 const name = this.sketchTitle.replace(/[^a-zA-Z0-9-_.]/g, '');
                 this.sketchService.downloadSketchURL(name);
-               
+
             });
         });
     }
@@ -1189,20 +1185,7 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
             const sketchElements = this.sketch.getAllElements();
             if (sketchElements.length === 0) {
                 resolveAllConverted();
-            }else {
-                const loadingEle: HTMLElement = document.getElementById('cssload-loader');
-                this.renderer.setStyle(loadingEle, 'display', 'block');
-
-                const loadingContainerEle: HTMLElement = document.getElementById('cssload-container');
-                this.renderer.setStyle(loadingContainerEle, 'display', 'block');
             }
-
-            const loadingEle: HTMLElement = document.getElementById('cssload-loader');
-            this.renderer.setStyle(loadingEle, 'display', 'block');
-          
-
-            const loadingContainerEle: HTMLElement = document.getElementById('cssload-container');
-            this.renderer.setStyle(loadingContainerEle, 'display', 'block');
 
             const toDataURL = url => fetch(url)
                 .then(response => response.blob())
@@ -1213,13 +1196,13 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
                     reader.readAsDataURL(blob);
                 }));
 
-           
+
             const sketchService = this.sketchService;
-            
+
             (async function loop() {
                 for (let i = 0; i < sketchElements.length; i++) {
                     await new Promise(resolve => {
-                        
+
                         if (sketchElements[i] instanceof ImageType) {
                             const image = sketchElements[i] as ImageType;
                             if (image.src.includes('/unisketch7/api/images/')) {
@@ -1240,9 +1223,9 @@ export class SketchToolbarComponent implements OnInit, OnDestroy {
                         resolveAllConverted();
                     }
                 }
-            
+
             })();
-            
+
         });
 
     }
