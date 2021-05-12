@@ -10,7 +10,7 @@
     "express": "^4.16.2",
     "express-fileupload": "^0.3.0",
     "express-session": "^1.15.6",
-    "nodemailer": "^4.3.0",
+    "nodemailer": "^6.4.16",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "pg": "6.4.2",
     "pg-hstore": "^2.3.2",
