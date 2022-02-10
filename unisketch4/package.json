@@ -32,7 +32,7 @@
     "jquery": "^3.3.1",
     "jspdf": "^1.5.3",
     "ngx-color-picker": "^6.3.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "popper.js": "^1.14.5",
     "rxjs": "^6.1.0",
     "save-svg-as-png": "^1.4.14",
